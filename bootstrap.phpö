@@ -14,9 +14,9 @@ function init_js(){
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>';
 }
 
-function init_navbar($style, $brand){
+function init_navbar($style, $brand, $links_to){
     echo '<nav class="navbar navbar-expand-lg navbar-'.$style.' bg-'.$style.'">';
-    echo '<a class="navbar-brand" href="#">'.$brand.'</a>
+    echo '<a class="navbar-brand" href="'.$links_to.'">'.$brand.'</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -46,10 +46,19 @@ function add_navbar_element($element, $links_to, $name, $args){
         </div>
         </li>';
     }
+    if($element == "search"){
+        echo '<form class="form-inline my-2 my-lg-0" action="'.$links_to.'" method="'.$args.'">
+        <input class="form-control mr-sm-2" type="search" placeholder="'.$name.'" aria-label="'.$name.'" name="query">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">'.$name.'</button>
+        </form>';
+    }
+    if($element == "lead_link"){
+        echo '<a class="btn btn-outline-'.$args.' my-2 my-sm-0" href="'.$links_to.'">'.$name.'</a>';
+    }
 
 }
 
-function add_dropdown_element($element, $links_to, $name){
+function create_dropdown_element($element, $links_to, $name){
     if($element == "link"){
         return '<a class="dropdown-item" href="'.$links_to.'">'.$name.'</a>';
     }
