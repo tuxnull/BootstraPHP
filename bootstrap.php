@@ -77,4 +77,17 @@ function navbar_finish(){
     </nav>';
 }
 
+function create_alert($content, $style){
+    return '<div class="alert alert-'.$style.'" role="alert">'.$content.'</div>';
+}
+
+function create_dismissable_alert($content, $style){
+    return '<div class="alert alert-'.$style.'" role="alert">'.$content.'<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+    </button></div>';
+}
+
+
+
+
 ?>
