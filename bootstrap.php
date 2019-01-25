@@ -1,22 +1,22 @@
 <?PHP
 function init_meta(){
-    echo '<meta charset="utf-8">
+    return '<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">';
 }
 
 function init_stylesheet(){
-    echo '<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">';
+    return '<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">';
 }
 
 function init_js(){
-    echo '<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    return '<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>';
 }
 
 function init_navbar($style, $brand, $links_to){
-    echo '<nav class="navbar navbar-expand-lg navbar-'.$style.' bg-'.$style.'">';
-    echo '<a class="navbar-brand" href="'.$links_to.'">'.$brand.'</a>
+    return '<nav class="navbar navbar-expand-lg navbar-'.$style.' bg-'.$style.'">
+    <a class="navbar-brand" href="'.$links_to.'">'.$brand.'</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -27,17 +27,17 @@ function init_navbar($style, $brand, $links_to){
 function add_navbar_element($element, $links_to, $name, $args){
     if($element == "link"){
         if($args == "active"){
-            echo '<li class="nav-item active">
+            return '<li class="nav-item active">
             <a class="nav-link" href="'.$links_to.'">'.$name.'</a>
             </li>';
         }else{
-            echo '<li class="nav-item">
+            return '<li class="nav-item">
             <a class="nav-link" href="'.$links_to.'">'.$name.'</a>
             </li>';
         }
     }
     if($element == "dropdown"){
-        echo '<li class="nav-item dropdown">
+        return '<li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="'.$links_to.'" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         '.$name.'
         </a>
@@ -69,11 +69,11 @@ function create_dropdown_element($element, $links_to, $name){
 }
 
 function navbar_swap_alignment(){
-    echo "</ul>";
+    return "</ul>";
 }
 
 function navbar_finish(){
-    echo '</div>
+    return '</div>
     </nav>';
 }
 
@@ -85,6 +85,47 @@ function create_dismissable_alert($content, $style){
     return '<div class="alert alert-'.$style.'" role="alert">'.$content.'<button type="button" class="close" data-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">&times;</span>
     </button></div>';
+}
+
+function create_badge($content, $style){
+    return '<span class="badge badge-'.$style.'">'.$content.'</span>'
+}
+
+function create_pill($content, $style){
+    return '<span class="badge badge-pill badge-'.$style.'">'.$content.'</span>';
+}
+
+function create_custom_link($element, $links_to, $content, $style, $disabled){
+    if($disabled == "true"){
+        $disabled = "disabled";
+    }else{
+        $disabled = "";
+    }
+    if($element == "badge"){
+        return '<a href="'.$links_to.'" class="badge badge-'.$style.'" '.$disabled.'>'.$content.'</a>';
+    }else if($element == "pill"){ #Pill Link
+        return '<a href="'.$links_to'" class="badge badge-pill badge-'.$style.'" '.$disabled.'>'.$content.'</a>';
+    }else if($element == "button"){ #Button Link
+        return '<a href="'.$links_to.'" class="btn btn-'.$style.'" '.$disabled.'>'.$content.'</a>';
+    }else if($element == "outline-button"){ #Outline colored Button Link
+        return '<a href="'.$links_to.'" class="btn btn-outline-'.$style.'" '.$disabled.'>'.$content.'</a>';
+    }else if($element == "button-sm"){ #Small Button
+        return '<a href="'.$links_to.'" class="btn btn-sm btn-'.$style.'" '.$disabled.'>'.$content.'</a>';
+    }else if($element == "outline-button-sm"){ #Small Outline Button
+        return '<a href="'.$links_to.'" class="btn btn-sm btn-outline-'.$style.'" '.$disabled.'>'.$content.'</a>';
+    }else if($element == "button-lg"){ #Big Button
+        return '<a href="'.$links_to.'" class="btn btn-lg btn-'.$style.'" '.$disabled.'>'.$content.'</a>';
+    }else if($element == "button-block"){ #Block Button
+        return '<a href="'.$links_to.'" class="btn btn-block btn-'.$style.'" '.$disabled.'>'.$content.'</a>';
+    }else if($element == "button-block-lg"){ #Big Block Button
+        return '<a href="'.$links_to.'" class="btn btn-block btn-lg btn-'.$style.'" '.$disabled.'>'.$content.'</a>';
+    }else if($element == "button-block-sm"){ #Small Block Button
+        return '<a href="'.$links_to.'" class="btn btn-block btn-sm btn-'.$style.'" '.$disabled.'>'.$content.'</a>';
+    }else if($element == "outline-button-lg"){ #Big Outline Button
+        return '<a href="'.$links_to.'" class="btn btn-lg btn-outline-'.$style.'" '.$disabled.'>'.$content.'</a>';
+    }else{ #No Element Found, Creating regular link with error message
+        return '<a href="'.$links_to.'" error="Could not find an element called '.$element.'" '.$disabled.'>'.$content.'</a>'
+    }
 }
 
 
