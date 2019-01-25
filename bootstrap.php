@@ -1,4 +1,5 @@
 <?PHP
+echo "<!-- BootstraPHP initialized! https://github.com/amazonshitcarshow/BootstraPHP -->";
 function init_meta(){
     return '<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">';
@@ -47,13 +48,13 @@ function add_navbar_element($element, $links_to, $name, $args){
         </li>';
     }
     if($element == "search"){
-        echo '<form class="form-inline my-2 my-lg-0" action="'.$links_to.'" method="'.$args.'">
+        return '<form class="form-inline my-2 my-lg-0" action="'.$links_to.'" method="'.$args.'">
         <input class="form-control mr-sm-2" type="search" placeholder="'.$name.'" aria-label="'.$name.'" name="query">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">'.$name.'</button>
         </form>';
     }
     if($element == "lead_link"){
-        echo '<a class="btn btn-outline-'.$args.' my-2 my-sm-0" href="'.$links_to.'">'.$name.'</a>';
+        return '<a class="btn btn-outline-'.$args.' my-2 my-sm-0" href="'.$links_to.'">'.$name.'</a>';
     }
 
 }
@@ -88,7 +89,7 @@ function create_dismissable_alert($content, $style){
 }
 
 function create_badge($content, $style){
-    return '<span class="badge badge-'.$style.'">'.$content.'</span>'
+    return '<span class="badge badge-'.$style.'">'.$content.'</span>';
 }
 
 function create_pill($content, $style){
@@ -104,7 +105,7 @@ function create_custom_link($element, $links_to, $content, $style, $disabled){
     if($element == "badge"){
         return '<a href="'.$links_to.'" class="badge badge-'.$style.'" '.$disabled.'>'.$content.'</a>';
     }else if($element == "pill"){ #Pill Link
-        return '<a href="'.$links_to'" class="badge badge-pill badge-'.$style.'" '.$disabled.'>'.$content.'</a>';
+        return '<a href="'.$links_to.'" class="badge badge-pill badge-'.$style.'" '.$disabled.'>'.$content.'</a>';
     }else if($element == "button"){ #Button Link
         return '<a href="'.$links_to.'" class="btn btn-'.$style.'" '.$disabled.'>'.$content.'</a>';
     }else if($element == "outline-button"){ #Outline colored Button Link
@@ -124,10 +125,57 @@ function create_custom_link($element, $links_to, $content, $style, $disabled){
     }else if($element == "outline-button-lg"){ #Big Outline Button
         return '<a href="'.$links_to.'" class="btn btn-lg btn-outline-'.$style.'" '.$disabled.'>'.$content.'</a>';
     }else{ #No Element Found, Creating regular link with error message
-        return '<a href="'.$links_to.'" error="Could not find an element called '.$element.'" '.$disabled.'>'.$content.'</a>'
+        return '<a href="'.$links_to.'" error="Could not find an element called '.$element.'" '.$disabled.'>'.$content.'</a>';
     }
 }
 
+function create_card($content, $card_header, $image_url){
+    if($image_url == ""){
+        if($card_header == ""){
+            $header = "<!-- Optional Card Header position here -->";
+        }else{
+            $header = '<div class="card-header">'.$card_header.'</div>';
+        }
+        return '<div class="card">
+        '.$header.'
+        <img src="'.$image_url.'" class="card-img-top" alt="'.$image_url.'">
+        <div class="card-body">
+        '.$content.'
+        </div>
+        </div>';
+    }else{
+        if($card_header == ""){
+            $header = "<!-- Optional Card Header position here -->";
+        }else{
+            $header = '<div class="card-header">'.$card_header.'</div>';
+        }
+        return '<div class="card">
+        '.$header.'
+        <div class="card-body">
+        '.$content.'
+        </div>
+        </div>';
+    }
+
+}
+
+function create_card_content($title, $subtitle, $content){
+    return '<h5 class="card-title">'.$title.'</h5>
+    <h6 class="card-subtitle mb-2 text-muted">'.$subtitle.'</h6>
+    <p class="card-text">'.$content.'</p>';
+}
+
+function create_card_list_group($content){
+    return '</div>
+    <ul class="list-group list-group-flush">
+    '.$content.'
+    </ul>
+    <div class="card-body">';
+}
+
+function create_list_group_item($content){
+    return '<li class="list-group-item">'.$content.'</li>';
+}
 
 
 
