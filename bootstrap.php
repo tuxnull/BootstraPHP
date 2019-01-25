@@ -1,5 +1,6 @@
 <?PHP
 echo "<!-- BootstraPHP initialized! https://github.com/amazonshitcarshow/BootstraPHP -->";
+echo "<meta name='bootstraPHP' content='https://github.com/amazonshitcarshow/BootstraPHP'>";
 function init_meta(){
     return '<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">';
@@ -192,6 +193,77 @@ function collapsible_div($content, $id, $show){
 
 function collapse_link($id){
     return "javascript:$('#".$id."').collapse('toggle');";
+}
+
+function breadcrumb($content){
+    return '<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+    '.$content.'
+    </ol>
+    </nav>';
+}
+
+function breadcrumb_item($links_to, $content, $active){
+    if($links_to == ""){
+        if($active == "true"){
+            return '<li class="breadcrumb-item active"><a href="'.$links_to.'">'.$content.'</a></li>';
+        }else{
+            return '<li class="breadcrumb-item"><a href="'.$links_to.'">'.$content.'</a></li>';
+        }
+    }else{
+        if($active == "true"){
+            return '<li class="breadcrumb-item active">'.$content.'</li>';
+        }else{
+            return '<li class="breadcrumb-item">'.$content.'</li>';
+        }
+    }
+}
+
+function jumbotron($content, $fluid){
+    if($fluid == "true"){
+        $fluid = "jumbotron-fluid";
+    }else{
+        $fluid = "";
+    }
+    return '<div class="jumbotron '.$fluid.'">
+    <div class="container">
+    '.$content.'
+    </div>
+    </div>';
+}
+
+function jumbotron_content($title, $lead_text, $content, $links_to, $button_text){
+    if($lead_text == ""){
+        $lead_text == "";
+    }else{
+        $lead_text = '<p class="lead">'.$lead_text.'</p>
+        <hr class="my-4">';
+    }
+
+    return '<h1 class="display-4">'.$title.'</h1>
+    '.$lead_text.'
+    <p>'.$content.'</p>
+    <a class="btn btn-primary btn-lg" href="'.$links_to.'" role="button">'.$button_text.'</a>';
+}
+
+function spinner($type, $style, $alt){
+    if($type == "border"){
+        return '<div class="spinner-border text-'.$style.'" role="status"><span class="sr-only">'.$alt.'</span></div>';
+    }else if($type == "growing"){
+        return '<div class="spinner-grow text-'.$style.'" role="status"><span class="sr-only">'.$alt.'</span></div>';
+    }else{
+        return "Spinner-element not found.";
+    }
+}
+
+function span_spinner($type){
+    if($type == "border"){
+        return '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>';
+    }else if($type == "grow"){
+        return '<span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>';
+    }else{
+        return 'Spinner-element not found.';
+    }
 }
 
 ?>
