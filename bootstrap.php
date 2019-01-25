@@ -25,7 +25,7 @@ function init_navbar($style, $brand, $links_to){
     <ul class="navbar-nav mr-auto">';
 }
 
-function add_navbar_element($element, $links_to, $name, $args){
+function navbar_element($element, $links_to, $name, $args){
     if($element == "link"){
         if($args == "active"){
             return '<li class="nav-item active">
@@ -59,7 +59,7 @@ function add_navbar_element($element, $links_to, $name, $args){
 
 }
 
-function create_dropdown_element($element, $links_to, $name){
+function dropdown_element($element, $links_to, $name){
     if($element == "link"){
         return '<a class="dropdown-item" href="'.$links_to.'">'.$name.'</a>';
     }
@@ -78,25 +78,25 @@ function navbar_finish(){
     </nav>';
 }
 
-function create_alert($content, $style){
+function alert($content, $style){
     return '<div class="alert alert-'.$style.'" role="alert">'.$content.'</div>';
 }
 
-function create_dismissable_alert($content, $style){
+function dismissable_alert($content, $style){
     return '<div class="alert alert-'.$style.'" role="alert">'.$content.'<button type="button" class="close" data-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">&times;</span>
     </button></div>';
 }
 
-function create_badge($content, $style){
+function badge($content, $style){
     return '<span class="badge badge-'.$style.'">'.$content.'</span>';
 }
 
-function create_pill($content, $style){
+function pill($content, $style){
     return '<span class="badge badge-pill badge-'.$style.'">'.$content.'</span>';
 }
 
-function create_custom_link($element, $links_to, $content, $style, $disabled){
+function custom_link($element, $links_to, $content, $style, $disabled){
     if($disabled == "true"){
         $disabled = "disabled";
     }else{
@@ -129,7 +129,7 @@ function create_custom_link($element, $links_to, $content, $style, $disabled){
     }
 }
 
-function create_card($content, $card_header, $image_url){
+function card($content, $card_header, $image_url){
     if($image_url == ""){
         if($card_header == ""){
             $header = "<!-- Optional Card Header position here -->";
@@ -159,13 +159,13 @@ function create_card($content, $card_header, $image_url){
 
 }
 
-function create_card_content($title, $subtitle, $content){
+function card_content($title, $subtitle, $content){
     return '<h5 class="card-title">'.$title.'</h5>
     <h6 class="card-subtitle mb-2 text-muted">'.$subtitle.'</h6>
     <p class="card-text">'.$content.'</p>';
 }
 
-function create_card_list_group($content){
+function card_list_group($content){
     return '</div>
     <ul class="list-group list-group-flush">
     '.$content.'
@@ -173,10 +173,25 @@ function create_card_list_group($content){
     <div class="card-body">';
 }
 
-function create_list_group_item($content){
+function list_group_item($content){
     return '<li class="list-group-item">'.$content.'</li>';
 }
 
+function no_arg(){
+    return "";
+}
 
+function collapsible_div($content, $id, $show){
+    if($show == "true"){
+        $show = "show";
+    }else{
+        $show = "";
+    }
+    return '<div class="collapse '.$show.'" id="'.$id.'">'.$content.'</div>';
+}
+
+function collapse_link($id){
+    return "javascript:$('#".$id."').collapse('toggle');";
+}
 
 ?>
