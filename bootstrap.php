@@ -21,14 +21,14 @@ function init_js(){
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>';
 }
 
-function init_navbar($style, $brand, $links_to){
+function init_navbar($style, $brand, $links_to, $content){
     return '<nav class="navbar navbar-expand-lg navbar-'.$style.' bg-'.$style.'">
     <a class="navbar-brand" href="'.$links_to.'">'.$brand.'</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">';
+    <ul class="navbar-nav mr-auto">'.$content."</ul></div></nav>";
 }
 
 function navbar_element($element, $links_to, $name, $args){
@@ -81,7 +81,7 @@ function navbar_swap_alignment(){
 
 function navbar_finish(){
     return '</div>
-    </nav>';
+    </nav><meta name="bootstraPHP_warning" content="navbar_finish() is deprecated">';
 }
 
 function alert($content, $style){
@@ -302,5 +302,54 @@ function col($class_prefix, $units, $content){
 function grid_break(){
     return '<div class="w-100"></div>';
 }
+
+function table($content, $dark, $striped, $bordered, $hover){
+    if($dark != ""){
+        $dark = "table-dark";
+    }
+    if($striped != ""){
+        $striped = "table-striped ";
+    }
+    if($bordered != ""){
+        $bordered = "table-bordered ";
+    }
+    if($hover != ""){
+        $hover = "table-haver ";
+    }
+
+    return '<table class="table '.$dark." ".$striped." ".$bordered."".$hover.'">'.$content.'</table>';
+}
+
+function table_head($style, $content){
+    if($style == ""){
+        return '<thead><tr>'.$content.'</tr></thead>';
+    }else{
+        return '<thead class="thead-'.$style.'"><tr>'.$content.'</tr></thead>';
+    }
+}
+
+function table_th($scope, $content){
+    return '<th scope="'.$scope.'">'.$content.'</th>';
+}
+
+function table_body($content){
+    return '<tbody>'.$content.'</tbody>';
+}
+
+function table_row($content){
+    return '<tr>'.$content.'</tr>';
+}
+
+function table_td($colspan, $content){
+    if($colspan != ""){
+        return '<td colspan="'.$colspan.'">'.$content.'</td>';
+    }
+    return '<td>'.$content.'</td>';
+}
+
+
+
+
+
 
 ?>
