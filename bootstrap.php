@@ -139,7 +139,6 @@ function card($content, $card_header, $image_url){
         }
         return '<div class="card">
         '.$header.'
-        <img src="'.$image_url.'" class="card-img-top" alt="'.$image_url.'">
         <div class="card-body">
         '.$content.'
         </div>
@@ -152,6 +151,7 @@ function card($content, $card_header, $image_url){
         }
         return '<div class="card">
         '.$header.'
+        <img src="'.$image_url.'" class="card-img-top" alt="'.$image_url.'">
         <div class="card-body">
         '.$content.'
         </div>
