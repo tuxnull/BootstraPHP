@@ -271,4 +271,36 @@ function span_spinner($type){
     }
 }
 
+function container($content){
+    return '<div class="container">'.$content.'</div>';
+}
+
+function grid_row($content, $horizontal_alignment){
+    if($horizontal_alignment == ""){
+        return '<div class="row">'.$content.'</div>';
+    }else{
+        return '<div class="row justify-content-'.$horizontal_alignment.'">'.$content.'</div>';
+    }
+
+}
+
+function col($class_prefix, $units, $content){
+    if($class_prefix == ""){
+
+    }else{
+        $class_prefix = "-".$class_prefix;
+    }
+    if($units>12){
+        echo '"<meta name="bootstraPHP_warning" content="Using a column with more than 12 width-units is not recommended!">';
+    }
+    if($units != ""){
+        $units = "-" . $units;
+    }
+    return '<div class="col'.$class_prefix.$units.'">'.$content.'</div>';
+}
+
+function grid_break(){
+    return '<div class="w-100"></div>';
+}
+
 ?>
