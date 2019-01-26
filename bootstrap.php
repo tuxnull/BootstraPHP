@@ -10,6 +10,56 @@ function init_stylesheet(){
     return '<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">';
 }
 
+function init_bootswatch_stylesheet($style){
+    $style = strtolower($style);
+    if($style == "cerulean"){
+        echo '<link rel="stylesheet" href="https://bootswatch.com/4/cerulean/bootstrap.min.css">';
+    }else if($style == "cosmo"){
+        echo '<link rel="stylesheet" href="https://bootswatch.com/4/cosmo/bootstrap.min.css">';
+    }else if($style == "cyborg"){
+        echo '<link rel="stylesheet" href="https://bootswatch.com/4/cyborg/bootstrap.min.css">';
+    }else if($style == "darkly"){
+        echo '<link rel="stylesheet" href="https://bootswatch.com/4/darkly/bootstrap.min.css">';
+    }else if($style == "flatly"){
+        echo '<link rel="stylesheet" href="https://bootswatch.com/4/flatly/bootstrap.min.css">';
+    }else if($style == "journal"){
+        echo '<link rel="stylesheet" href="https://bootswatch.com/4/journal/bootstrap.min.css">';
+    }else if($style == "litera"){
+        echo '<link rel="stylesheet" href="https://bootswatch.com/4/litera/bootstrap.min.css">';
+    }else if($style == "lumen"){
+        echo '<link rel="stylesheet" href="https://bootswatch.com/4/lumen/bootstrap.min.css">';
+    }else if($style == "lux"){
+        echo '<link rel="stylesheet" href="https://bootswatch.com/4/lux/bootstrap.min.css">';
+    }else if($style == "materia"){
+        echo '<link rel="stylesheet" href="https://bootswatch.com/4/materia/bootstrap.min.css">';
+    }else if($style == "minty"){
+        echo '<link rel="stylesheet" href="https://bootswatch.com/4/minty/bootstrap.min.css">';
+    }else if($style == "pulse"){
+        echo '<link rel="stylesheet" href="https://bootswatch.com/4/pulse/bootstrap.min.css">';
+    }else if($style == "sandstone"){
+        echo '<link rel="stylesheet" href="https://bootswatch.com/4/sandstone/bootstrap.min.css">';
+    }else if($style == "simplex"){
+        echo '<link rel="stylesheet" href="https://bootswatch.com/4/simplex/bootstrap.min.css">';
+    }else if($style == "sketchy"){
+        echo '<link rel="stylesheet" href="https://bootswatch.com/4/sketchy/bootstrap.min.css">';
+    }else if($style == "slate"){
+        echo '<link rel="stylesheet" href="https://bootswatch.com/4/slate/bootstrap.min.css">';
+    }else if($style == "solar"){
+        echo '<link rel="stylesheet" href="https://bootswatch.com/4/solar/bootstrap.min.css">';
+    }else if($style == "spacelab"){
+        echo '<link rel="stylesheet" href="https://bootswatch.com/4/spacelab/bootstrap.min.css">';
+    }else if($style == "superhero"){
+        echo '<link rel="stylesheet" href="https://bootswatch.com/4/superhero/bootstrap.min.css">';
+    }else if($style == "united"){
+        echo '<link rel="stylesheet" href="https://bootswatch.com/4/united/bootstrap.min.css">';
+    }else if($style == "yeti"){
+        echo '<link rel="stylesheet" href="https://bootswatch.com/4/yeti/bootstrap.min.css">';
+    }else{
+        return "Couldn't find the Bootswatch Style you were looking for! Including default Bootstrap Style... ".'<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">';
+    }
+
+}
+
 function init_js(){
     return '<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
