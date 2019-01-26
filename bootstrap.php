@@ -1,6 +1,6 @@
 <?PHP
-echo "<!-- BootstraPHP initialized! https://github.com/amazonshitcarshow/BootstraPHP -->";
-echo "<meta name='bootstraPHP' content='https://github.com/amazonshitcarshow/BootstraPHP'>";
+echo "<!-- BootstraPHP initialized! https://github.com/tuxnull/BootstraPHP -->";
+echo "<meta name='bootstraPHP' content='https://github.com/tuxnull/BootstraPHP'>";
 function init_meta(){
     return '<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">';
@@ -12,52 +12,7 @@ function init_stylesheet(){
 
 function init_bootswatch_stylesheet($style){
     $style = strtolower($style);
-    if($style == "cerulean"){
-        echo '<link rel="stylesheet" href="https://bootswatch.com/4/cerulean/bootstrap.min.css">';
-    }else if($style == "cosmo"){
-        echo '<link rel="stylesheet" href="https://bootswatch.com/4/cosmo/bootstrap.min.css">';
-    }else if($style == "cyborg"){
-        echo '<link rel="stylesheet" href="https://bootswatch.com/4/cyborg/bootstrap.min.css">';
-    }else if($style == "darkly"){
-        echo '<link rel="stylesheet" href="https://bootswatch.com/4/darkly/bootstrap.min.css">';
-    }else if($style == "flatly"){
-        echo '<link rel="stylesheet" href="https://bootswatch.com/4/flatly/bootstrap.min.css">';
-    }else if($style == "journal"){
-        echo '<link rel="stylesheet" href="https://bootswatch.com/4/journal/bootstrap.min.css">';
-    }else if($style == "litera"){
-        echo '<link rel="stylesheet" href="https://bootswatch.com/4/litera/bootstrap.min.css">';
-    }else if($style == "lumen"){
-        echo '<link rel="stylesheet" href="https://bootswatch.com/4/lumen/bootstrap.min.css">';
-    }else if($style == "lux"){
-        echo '<link rel="stylesheet" href="https://bootswatch.com/4/lux/bootstrap.min.css">';
-    }else if($style == "materia"){
-        echo '<link rel="stylesheet" href="https://bootswatch.com/4/materia/bootstrap.min.css">';
-    }else if($style == "minty"){
-        echo '<link rel="stylesheet" href="https://bootswatch.com/4/minty/bootstrap.min.css">';
-    }else if($style == "pulse"){
-        echo '<link rel="stylesheet" href="https://bootswatch.com/4/pulse/bootstrap.min.css">';
-    }else if($style == "sandstone"){
-        echo '<link rel="stylesheet" href="https://bootswatch.com/4/sandstone/bootstrap.min.css">';
-    }else if($style == "simplex"){
-        echo '<link rel="stylesheet" href="https://bootswatch.com/4/simplex/bootstrap.min.css">';
-    }else if($style == "sketchy"){
-        echo '<link rel="stylesheet" href="https://bootswatch.com/4/sketchy/bootstrap.min.css">';
-    }else if($style == "slate"){
-        echo '<link rel="stylesheet" href="https://bootswatch.com/4/slate/bootstrap.min.css">';
-    }else if($style == "solar"){
-        echo '<link rel="stylesheet" href="https://bootswatch.com/4/solar/bootstrap.min.css">';
-    }else if($style == "spacelab"){
-        echo '<link rel="stylesheet" href="https://bootswatch.com/4/spacelab/bootstrap.min.css">';
-    }else if($style == "superhero"){
-        echo '<link rel="stylesheet" href="https://bootswatch.com/4/superhero/bootstrap.min.css">';
-    }else if($style == "united"){
-        echo '<link rel="stylesheet" href="https://bootswatch.com/4/united/bootstrap.min.css">';
-    }else if($style == "yeti"){
-        echo '<link rel="stylesheet" href="https://bootswatch.com/4/yeti/bootstrap.min.css">';
-    }else{
-        return "Couldn't find the Bootswatch Style you were looking for! Including default Bootstrap Style... ".'<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">';
-    }
-
+    return '<link rel="stylesheet" href="https://bootswatch.com/4/'.$style.'/bootstrap.min.css">';
 }
 
 function init_js(){
