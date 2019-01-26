@@ -1,7 +1,7 @@
 {
     "name": "tuxnull/bootstraPHP",
     "description": "A PHP Boostrap wrapper",
-    "keywords": ["bootstrap","webdesign"],
+    "keywords": ["bootstrap","webdesign","stylesheets"],
     "homepage": "https://github.com/tuxnull/BootstraPHP",
     "license": "MIT",
     "authors": [

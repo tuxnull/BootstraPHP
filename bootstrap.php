@@ -81,7 +81,7 @@ function navbar_swap_alignment(){
 
 function navbar_finish(){
     return '</div>
-    </nav><meta name="bootstraPHP_warning" content="navbar_finish() is deprecated">';
+    </nav><meta name="bootstraPHP_warning" content="navbar_finish() is deprecated - do not use this statement">';
 }
 
 function alert($content, $style){
