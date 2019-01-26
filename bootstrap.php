@@ -264,7 +264,7 @@ function spinner($type, $style, $alt){
 function span_spinner($type){
     if($type == "border"){
         return '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>';
-    }else if($type == "grow"){
+    }else if($type == "growing"){
         return '<span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>';
     }else{
         return 'Spinner-element not found.';
