@@ -1,6 +1,8 @@
 <?PHP
 echo "<!-- BootstraPHP initialized! https://github.com/tuxnull/BootstraPHP -->";
 echo "<meta name='bootstraPHP' content='https://github.com/tuxnull/BootstraPHP'>";
+
+
 function init_meta(){
     return '<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">';
