@@ -389,6 +389,24 @@ function input_group_append($content){
     return '<div class="input-group-append">'.$content.'</div>';
 }
 
+function pagination($aria_label, $content, $alignment){
+    if($alignment != ""){
+        $alignment = "justify-content-".$alignment;
+    }
+    return '<nav aria-label="'.$aria_label.'"><ul class="pagination '.$alignment.'">'.$content.'</ul></nav>';
+}
+
+function page_item($content, $disabled){
+    if($disabled == "true"){
+        $disabled == "disabled";
+    }
+    return '<li class="page-item '.$disabled.'">'.$content.'</li>';
+}
+
+function page_link($links_to, $content){
+    return '<a class="page-link" href="'.$links_to.'">'.$content.'</a>';
+}
+
 
 
 
