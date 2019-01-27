@@ -232,7 +232,7 @@ function custom_link($args, $content){
         $disabled = false;
     }
 
-    
+
     if($disabled == true){
         $disabled = "disabled";
     }else{
@@ -265,7 +265,20 @@ function custom_link($args, $content){
     }
 }
 
-function card($content, $card_header, $image_url){
+function card($args, $content){
+
+    if(array_key_exists("image_url",$args)){
+        $image_url = $args["image_url"];
+    }else{
+        $image_url = "";
+    }
+
+    if(array_key_exists("card_header",$args)){
+        $card_header = $args["card_header"];
+    }else{
+        $card_header = "";
+    }
+
     if($image_url == ""){
         if($card_header == ""){
             $header = "<!-- Optional Card Header position here -->";
@@ -295,7 +308,20 @@ function card($content, $card_header, $image_url){
 
 }
 
-function card_content($title, $subtitle, $content){
+function card_content($args, $content){
+
+    if(array_key_exists("title", $args)){
+        $title = $args["title"];
+    }else{
+        $title = "";
+    }
+
+    if(array_key_exists("subtitle", $args)){
+        $subtitle = $args["card_header"];
+    }else{
+        $subtitle = "";
+    }
+
     return '<h5 class="card-title">'.$title.'</h5>
     <h6 class="card-subtitle mb-2 text-muted">'.$subtitle.'</h6>
     <p class="card-text">'.$content.'</p>';
