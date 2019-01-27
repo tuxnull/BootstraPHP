@@ -53,9 +53,55 @@ function init_navbar($args, $content){
     <ul class="navbar-nav mr-auto">'.$content."</ul></div></nav>";
 }
 
-function navbar_element($element, $links_to, $name, $args){
+function navbar_element($args){
+    if(array_key_exists("element",$args)){
+        $element = $args["element"];
+    }else{
+        return '<b>BootstraPHP has encountered an error: navbar_element is missing required argument "element"';
+    }
+
+    if(array_key_exists("links_to",$args)){
+        $links_to = $args["links_to"];
+    }else{
+        return '<b>BootstraPHP has encountered an error: navbar_element is missing required argument "links_to"';
+    }
+
+    if(array_key_exists("name",$args)){
+        $name = $args["name"];
+    }else{
+        return '<b>BootstraPHP has encountered an error: navbar_element is missing required argument "name"';
+    }
+
+    if(array_key_exists("active",$args)){
+        if($args["active"] == true){
+            $active = true;
+        }else{
+            $active = false;
+        }
+    }else{
+        $active = false;
+    }
+
+    if(array_key_exists("style",$args)){
+        $style = $args["style"];
+    }else{
+        $active = "";
+    }
+
+    if(array_key_exists("dropdown_content",$args)){
+        $dcontent = $args["dropdown_content"];
+    }else{
+        $dcontent = "";
+    }
+
+    if(array_key_exists("return_url",$args)){
+        $returl = $args["return_url"];
+    }else{
+        $returl = "";
+    }
+
     if($element == "link"){
-        if($args == "active"){
+        if($active == true){
             return '<li class="nav-item active">
             <a class="nav-link" href="'.$links_to.'">'.$name.'</a>
             </li>';
@@ -71,18 +117,18 @@ function navbar_element($element, $links_to, $name, $args){
         '.$name.'
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-        '.$args.'
+        '.$dcontent.'
         </div>
         </li>';
     }
     if($element == "search"){
-        return '<form class="form-inline my-2 my-lg-0" action="'.$links_to.'" method="'.$args.'">
+        return '<form class="form-inline my-2 my-lg-0" action="'.$links_to.'" method="'.$returl.'">
         <input class="form-control mr-sm-2" type="search" placeholder="'.$name.'" aria-label="'.$name.'" name="query">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">'.$name.'</button>
         </form>';
     }
     if($element == "lead_link"){
-        return '<a class="btn btn-outline-'.$args.' my-2 my-sm-0" href="'.$links_to.'">'.$name.'</a>';
+        return '<a class="btn btn-outline-'.$style.' my-2 my-sm-0" href="'.$links_to.'">'.$name.'</a>';
     }
 
 }
