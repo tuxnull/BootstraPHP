@@ -23,7 +23,27 @@ function init_js(){
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>';
 }
 
-function init_navbar($style, $brand, $links_to, $content){
+function init_navbar($args, $content){
+
+    if(array_key_exists("style",$args)){
+        $style = $args["style"];
+    }else{
+        return '<b>BootstraPHP has encountered an error: init_navbar is missing required argument "style"';
+    }
+
+    if(array_key_exists("links_to",$args)){
+        $links_to = $args["links_to"];
+    }else{
+        return '<b>BootstraPHP has encountered an error: init_navbar is missing required argument "links_to"';
+    }
+
+    if(array_key_exists("brand",$args)){
+        $brand = $args["brand"];
+    }else{
+        return '<b>BootstraPHP has encountered an error: init_navbar is missing required argument "brand"';
+    }
+
+
     return '<nav class="navbar navbar-expand-lg navbar-'.$style.' bg-'.$style.'">
     <a class="navbar-brand" href="'.$links_to.'">'.$brand.'</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,9 +53,55 @@ function init_navbar($style, $brand, $links_to, $content){
     <ul class="navbar-nav mr-auto">'.$content."</ul></div></nav>";
 }
 
-function navbar_element($element, $links_to, $name, $args){
+function navbar_element($args){
+    if(array_key_exists("element",$args)){
+        $element = $args["element"];
+    }else{
+        return '<b>BootstraPHP has encountered an error: navbar_element is missing required argument "element"';
+    }
+
+    if(array_key_exists("links_to",$args)){
+        $links_to = $args["links_to"];
+    }else{
+        return '<b>BootstraPHP has encountered an error: navbar_element is missing required argument "links_to"';
+    }
+
+    if(array_key_exists("name",$args)){
+        $name = $args["name"];
+    }else{
+        return '<b>BootstraPHP has encountered an error: navbar_element is missing required argument "name"';
+    }
+
+    if(array_key_exists("active",$args)){
+        if($args["active"] == true){
+            $active = true;
+        }else{
+            $active = false;
+        }
+    }else{
+        $active = false;
+    }
+
+    if(array_key_exists("style",$args)){
+        $style = $args["style"];
+    }else{
+        $active = "";
+    }
+
+    if(array_key_exists("dropdown_content",$args)){
+        $dcontent = $args["dropdown_content"];
+    }else{
+        $dcontent = "";
+    }
+
+    if(array_key_exists("return_url",$args)){
+        $returl = $args["return_url"];
+    }else{
+        $returl = "";
+    }
+
     if($element == "link"){
-        if($args == "active"){
+        if($active == true){
             return '<li class="nav-item active">
             <a class="nav-link" href="'.$links_to.'">'.$name.'</a>
             </li>';
@@ -51,23 +117,50 @@ function navbar_element($element, $links_to, $name, $args){
         '.$name.'
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-        '.$args.'
+        '.$dcontent.'
         </div>
         </li>';
     }
     if($element == "search"){
-        return '<form class="form-inline my-2 my-lg-0" action="'.$links_to.'" method="'.$args.'">
+        return '<form class="form-inline my-2 my-lg-0" action="'.$links_to.'" method="'.$returl.'">
         <input class="form-control mr-sm-2" type="search" placeholder="'.$name.'" aria-label="'.$name.'" name="query">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">'.$name.'</button>
         </form>';
     }
     if($element == "lead_link"){
-        return '<a class="btn btn-outline-'.$args.' my-2 my-sm-0" href="'.$links_to.'">'.$name.'</a>';
+        return '<a class="btn btn-outline-'.$style.' my-2 my-sm-0" href="'.$links_to.'">'.$name.'</a>';
     }
 
 }
 
-function dropdown_element($element, $links_to, $name){
+function dropdown_element($args){
+
+    if(array_key_exists("element", $args)){
+        $element = $args["element"];
+    }else{
+        return '<b>BootstraPHP has encountered an error: dropdown_element is missing required argument "element"';
+    }
+
+    if(array_key_exists("links_to", $args)){
+        if($args["links_to"]){
+            $links_to = $args["links_to"];
+        }else{
+            $links_to = "";
+        }
+    }else{
+        $links_to = "";
+    }
+
+    if(array_key_exists("name", $args)){
+        if($args["name"]){
+            $name = $args["name"];
+        }else{
+            $name = "";
+        }
+    }else{
+        $name = "";
+    }
+
     if($element == "link"){
         return '<a class="dropdown-item" href="'.$links_to.'">'.$name.'</a>';
     }
@@ -86,14 +179,23 @@ function navbar_finish(){
     </nav><meta name="bootstraPHP_warning" content="navbar_finish() is deprecated - do not use this statement">';
 }
 
-function alert($content, $style){
-    return '<div class="alert alert-'.$style.'" role="alert">'.$content.'</div>';
-}
-
-function dismissable_alert($content, $style){
-    return '<div class="alert alert-'.$style.'" role="alert">'.$content.'<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-    </button></div>';
+function alert($args){
+    if(array_key_exists("dismissable",$args)){ #Dismissable attribute is optional, doesnt need to be included in the array this way
+        if($args["dismissable"] == true){
+            $dismissable = false;
+        }else{
+            $dismissable = false;
+        }
+    }else{
+        $dismissable = false;
+    }
+    if ($dismissable == true) {
+        return '<div class="alert alert-'.$args['style'].'" role="alert">'.$args['content'].'<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button></div>';
+    } else {
+        return '<div class="alert alert-'.$args['style'].'" role="alert">'.$args['content'].'</div>';
+    }
 }
 
 function badge($content, $style){
@@ -104,8 +206,34 @@ function pill($content, $style){
     return '<span class="badge badge-pill badge-'.$style.'">'.$content.'</span>';
 }
 
-function custom_link($element, $links_to, $content, $style, $disabled){
-    if($disabled == "true"){
+function custom_link($args, $content){
+
+    if(array_key_exists("element",$args)){
+        $element = $args["element"];
+    }else{
+        return '<b>BootstraPHP has encountered an error: custom_link is missing required argument "element"';
+    }
+
+    if(array_key_exists("links_to",$args)){
+        $links_to = $args["links_to"];
+    }else{
+        return '<b>BootstraPHP has encountered an error: custom_link is missing required argument "links_to"';
+    }
+
+    if(array_key_exists("style",$args)){
+        $style = $args["style"];
+    }else{
+        return '<b>BootstraPHP has encountered an error: custom_link is missing required argument "style"';
+    }
+
+    if(array_key_exists("disabled",$args)){
+        $disabled = $args["disabled"];
+    }else{
+        $disabled = false;
+    }
+
+
+    if($disabled == true){
         $disabled = "disabled";
     }else{
         $disabled = "";
@@ -137,7 +265,20 @@ function custom_link($element, $links_to, $content, $style, $disabled){
     }
 }
 
-function card($content, $card_header, $image_url){
+function card($args, $content){
+
+    if(array_key_exists("image_url",$args)){
+        $image_url = $args["image_url"];
+    }else{
+        $image_url = "";
+    }
+
+    if(array_key_exists("card_header",$args)){
+        $card_header = $args["card_header"];
+    }else{
+        $card_header = "";
+    }
+
     if($image_url == ""){
         if($card_header == ""){
             $header = "<!-- Optional Card Header position here -->";
@@ -167,7 +308,20 @@ function card($content, $card_header, $image_url){
 
 }
 
-function card_content($title, $subtitle, $content){
+function card_content($args, $content){
+
+    if(array_key_exists("title", $args)){
+        $title = $args["title"];
+    }else{
+        $title = "";
+    }
+
+    if(array_key_exists("subtitle", $args)){
+        $subtitle = $args["subtitle"];
+    }else{
+        $subtitle = "";
+    }
+
     return '<h5 class="card-title">'.$title.'</h5>
     <h6 class="card-subtitle mb-2 text-muted">'.$subtitle.'</h6>
     <p class="card-text">'.$content.'</p>';
@@ -189,8 +343,21 @@ function no_arg(){
     return "";
 }
 
-function collapsible_div($content, $id, $show){
-    if($show == "true"){
+function collapsible_div($args, $content){
+
+    if(array_key_exists("show", $args)){
+        $show = $args["show"];
+    }else{
+        $show = false;
+    }
+
+    if(array_key_exists("id", $args)){
+        $id = $args["id"];
+    }else{
+        return '<b>BootstraPHP has encountered an error: collapsible_div is missing required argument "id"';
+    }
+
+    if($show == true){
         $show = "show";
     }else{
         $show = "";
@@ -210,15 +377,28 @@ function breadcrumb($content){
     </nav>';
 }
 
-function breadcrumb_item($links_to, $content, $active){
+function breadcrumb_item($args, $content){
+
+    if(array_key_exists("links_to", $args)){
+        $links_to = $args["links_to"];
+    }else{
+        $links_to = "";
+    }
+
+    if(array_key_exists("active", $args)){
+        $active = $args["active"];
+    }else{
+        $active = false;
+    }
+
     if($links_to == ""){
-        if($active == "true"){
+        if($active == true){
             return '<li class="breadcrumb-item active"><a href="'.$links_to.'">'.$content.'</a></li>';
         }else{
             return '<li class="breadcrumb-item"><a href="'.$links_to.'">'.$content.'</a></li>';
         }
     }else{
-        if($active == "true"){
+        if($active == true){
             return '<li class="breadcrumb-item active">'.$content.'</li>';
         }else{
             return '<li class="breadcrumb-item">'.$content.'</li>';
@@ -226,8 +406,16 @@ function breadcrumb_item($links_to, $content, $active){
     }
 }
 
-function jumbotron($content, $fluid){
-    if($fluid == "true"){
+function jumbotron($args, $content){
+
+    if(array_key_exists("fluid", $args)){
+        $fluid = $args["fluid"];
+    }else{
+        $fluid = false;
+    }
+
+
+    if($fluid == true){
         $fluid = "jumbotron-fluid";
     }else{
         $fluid = "";
@@ -239,7 +427,32 @@ function jumbotron($content, $fluid){
     </div>';
 }
 
-function jumbotron_content($title, $lead_text, $content, $links_to, $button_text){
+function jumbotron_content($args, $content){
+
+    if(array_key_exists("lead_text", $args)){
+        $lead_text = $args["lead_text"];
+    }else{
+        $lead_text = "";
+    }
+
+    if(array_key_exists("title", $args)){
+        $title = $args["title"];
+    }else{
+        $title = "";
+    }
+
+    if(array_key_exists("links_to", $args)){
+        $links_to = $args["links_to"];
+    }else{
+        $links_to = "";
+    }
+
+    if(array_key_exists("button_text", $args)){
+        $button_text = $args["button_text"];
+    }else{
+        $button_text = "";
+    }
+
     if($lead_text == ""){
         $lead_text == "";
     }else{
@@ -247,13 +460,38 @@ function jumbotron_content($title, $lead_text, $content, $links_to, $button_text
         <hr class="my-4">';
     }
 
+    if($button_text != ""){
+        $button_text = '<a class="btn btn-primary btn-lg" href="'.$links_to.'" role="button">'.$button_text.'</a>';
+    }
+
     return '<h1 class="display-4">'.$title.'</h1>
     '.$lead_text.'
     <p>'.$content.'</p>
-    <a class="btn btn-primary btn-lg" href="'.$links_to.'" role="button">'.$button_text.'</a>';
+    '.$button_text;
 }
 
-function spinner($type, $style, $alt){
+function spinner($args){
+
+    if(array_key_exists("type", $args)){
+        $type = $args["type"];
+    }else{
+        return '<b>BootstraPHP has encountered an error: spinner is missing required argument "type"';
+    }
+
+    if(array_key_exists("style", $args)){
+        $style = $args["style"];
+    }else{
+        return '<b>BootstraPHP has encountered an error: spinner is missing required argument "style"';
+    }
+
+    if(array_key_exists("alt", $args)){
+        $alt = $args["alt"];
+    }else{
+        $alt = "";
+    }
+
+
+
     if($type == "border"){
         return '<div class="spinner-border text-'.$style.'" role="status"><span class="sr-only">'.$alt.'</span></div>';
     }else if($type == "growing"){
@@ -277,7 +515,14 @@ function container($content){
     return '<div class="container">'.$content.'</div>';
 }
 
-function grid_row($content, $horizontal_alignment){
+function grid_row($args, $content){
+
+    if(array_key_exists("horizontal_alignment", $args)){
+        $horizontal_alignment = $args["horizontal_alignment"];
+    }else{
+        $horizontal_alignment = "";
+    }
+
     if($horizontal_alignment == ""){
         return '<div class="row">'.$content.'</div>';
     }else{
@@ -286,12 +531,25 @@ function grid_row($content, $horizontal_alignment){
 
 }
 
-function col($class_prefix, $units, $content){
-    if($class_prefix == ""){
+function col($args, $content){
 
+    if(array_key_exists("class_prefix", $args)){
+        $class_prefix = $args["class_prefix"];
     }else{
+        $class_prefix = "";
+    }
+
+    if(array_key_exists("units", $args)){
+        $units = $args["units"];
+    }else{
+        $units = "";
+    }
+
+
+    if($class_prefix != ""){
         $class_prefix = "-".$class_prefix;
     }
+
     if($units>12){
         echo '"<meta name="bootstraPHP_warning" content="Using a column with more than 12 width-units is not recommended!">';
     }
@@ -305,24 +563,58 @@ function grid_break(){
     return '<div class="w-100"></div>';
 }
 
-function table($content, $dark, $striped, $bordered, $hover){
-    if($dark != ""){
+function table($args, $content){
+
+    if(array_key_exists("dark", $args)){
+        $dark = $args["dark"];
+    }else{
+        $dark = false;
+    }
+
+    if(array_key_exists("striped", $args)){
+        $striped = $args["striped"];
+    }else{
+        $striped = false;
+    }
+
+    if(array_key_exists("bordered", $args)){
+        $bordered = $args["bordered"];
+    }else{
+        $bordered = false;
+    }
+
+    if(array_key_exists("hover", $args)){
+        $hover = $args["hover"];
+    }else{
+        $hover = false;
+    }
+
+
+
+    if($dark == true){
         $dark = "table-dark";
     }
-    if($striped != ""){
+    if($striped == true){
         $striped = "table-striped ";
     }
-    if($bordered != ""){
+    if($bordered == true){
         $bordered = "table-bordered ";
     }
-    if($hover != ""){
+    if($hover == true){
         $hover = "table-hover ";
     }
 
     return '<table class="table '.$dark." ".$striped." ".$bordered."".$hover.'">'.$content.'</table>';
 }
 
-function table_head($style, $content){
+function table_head($args, $content){
+
+    if(array_key_exists("style", $args)){
+        $style = $args["style"];
+    }else{
+        $style = "";
+    }
+
     if($style == ""){
         return '<thead><tr>'.$content.'</tr></thead>';
     }else{
@@ -330,7 +622,14 @@ function table_head($style, $content){
     }
 }
 
-function table_th($scope, $content){
+function table_th($args, $content){
+
+    if(array_key_exists("scope", $args)){
+        $scope = $args["scope"];
+    }else{
+        $scope = "";
+    }
+
     return '<th scope="'.$scope.'">'.$content.'</th>';
 }
 
@@ -342,18 +641,79 @@ function table_row($content){
     return '<tr>'.$content.'</tr>';
 }
 
-function table_td($colspan, $content){
+function table_td($args, $content){
+
+    if(array_key_exists("colspan", $args)){
+        $colspan = $args["colspan"];
+    }else{
+        $colspan = "";
+    }
+
     if($colspan != ""){
         return '<td colspan="'.$colspan.'">'.$content.'</td>';
     }
     return '<td>'.$content.'</td>';
 }
 
-function form($action, $method, $enctype, $content){
+function form($args, $content){
+
+    if(array_key_exists("action", $args)){
+        $action = $args["action"];
+    }else{
+        return '<b>BootstraPHP has encountered an error: form is missing required argument "action"';
+    }
+
+    if(array_key_exists("method", $args)){
+        $method = $args["method"];
+    }else{
+        return '<b>BootstraPHP has encountered an error: form is missing required argument "method"';
+    }
+
+    if(array_key_exists("enctype", $args)){
+        $enctype = $args["enctype"];
+    }else{
+        $enctype = "";
+    }
+
+    if($enctype != ""){
+        $enctype = 'enctype="'.$enctype.'"';
+    }
+
     return '<form action="'.$action.'" method="'.$method.'" '.$enctype.'>'.$content.'</form>';
 }
 
-function form_input($type, $label, $placeholder, $prepend, $append, $name){
+function form_input($args){
+
+    if(array_key_exists("prepend", $args)){
+        $prepend = $args["prepend"];
+    }else{
+        $prepend = "";
+    }
+
+    if(array_key_exists("append", $args)){
+        $append = $args["append"];
+    }else{
+        $append = "";
+    }
+
+    if(array_key_exists("type", $args)){
+        $type = $args["type"];
+    }else{
+        return '<b>BootstraPHP has encountered an error: form_input is missing required argument "type"';
+    }
+
+    if(array_key_exists("placeholder", $args)){
+        $placeholder = $args["placeholder"];
+    }else{
+        $placeholder = "";
+    }
+
+    if(array_key_exists("name", $args)){
+        $name = $args["name"];
+    }else{
+        $name = "";
+    }
+
     if($prepend != ""){
         $prepend = '<div class="input-group-prepend">
         <span class="input-group-text" id="basic-addon1">'.$prepend.'</span>
@@ -381,32 +741,38 @@ function input_group_prepend($content){
     return '<div class="input-group-prepend">'.$content.'</div>';
 }
 
-function input($type, $name, $placeholder, $id){
+function input($args){
+
+    if(array_key_exists("type", $args)){
+        $type = $args["type"];
+    }else{
+        return '<b>BootstraPHP has encountered an error: input is missing required argument "type"';
+    }
+
+    if(array_key_exists("placeholder", $args)){
+        $placeholder = $args["placeholder"];
+    }else{
+        $placeholder = "";
+    }
+
+    if(array_key_exists("name", $args)){
+        $name = $args["name"];
+    }else{
+        $name = "";
+    }
+
+    if(array_key_exists("id", $args)){
+        $id = $args["id"];
+    }else{
+        $id = "";
+    }
+
     return '<input type="'.$type.'" placeholder="'.$placeholder.'" name="'.$name.'" id="'.$id.'">';
 }
 
 function input_group_append($content){
     return '<div class="input-group-append">'.$content.'</div>';
 }
-
-function pagination($aria_label, $content, $alignment){
-    if($alignment != ""){
-        $alignment = "justify-content-".$alignment;
-    }
-    return '<nav aria-label="'.$aria_label.'"><ul class="pagination '.$alignment.'">'.$content.'</ul></nav>';
-}
-
-function page_item($content, $disabled){
-    if($disabled == "true"){
-        $disabled == "disabled";
-    }
-    return '<li class="page-item '.$disabled.'">'.$content.'</li>';
-}
-
-function page_link($links_to, $content){
-    return '<a class="page-link" href="'.$links_to.'">'.$content.'</a>';
-}
-
 
 
 
