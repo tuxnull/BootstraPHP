@@ -1,7 +1,4 @@
 <?PHP
-echo "<!-- BootstraPHP initialized! https://github.com/tuxnull/BootstraPHP -->";
-echo "<meta name='bootstraPHP' content='https://github.com/tuxnull/BootstraPHP'>";
-
 
 function init_meta(){
     return '<meta charset="utf-8">
@@ -86,15 +83,25 @@ function navbar_finish(){
     </nav><meta name="bootstraPHP_warning" content="navbar_finish() is deprecated - do not use this statement">';
 }
 
-function alert($content, $style){
-    return '<div class="alert alert-'.$style.'" role="alert">'.$content.'</div>';
-}
 
-function dismissable_alert($content, $style){
-    return '<div class="alert alert-'.$style.'" role="alert">'.$content.'<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+$alert_args = array(
+  'content' => 'I can be a string or var',
+  'style' => 'warning',
+  'dismisable' => true
+);
+
+function alert($alert_args){
+
+  if ($alert_args['dismisable'] == true) {
+    return '<div class="alert alert-'.$alert_args['style'].'" role="alert">'.$alert_args['content'].'<button type="button" class="close" data-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">&times;</span>
     </button></div>';
+  } else {
+    return '<div class="alert alert-'.$alert_args['style'].'" role="alert">'.$alert_args['content'].'</div>';
+  }
+
 }
+
 
 function badge($content, $style){
     return '<span class="badge badge-'.$style.'">'.$content.'</span>';
