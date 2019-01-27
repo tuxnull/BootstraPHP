@@ -810,7 +810,7 @@ function page_link($args, $content){
     if(array_key_exists("links_to", $args)){
         $links_to = $args["links_to"];
     }else{
-        $links_to = "";
+        return '<b>BootstraPHP has encountered an error: page_link is missing required argument "links_to"';
     }
 
     return '<a class="page-link" href="'.$links_to.'">'.$content.'</a>';
