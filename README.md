@@ -1,10 +1,15 @@
 # BootstraPHP
 A Bootstrap wrapper for PHP
 
-(NEW) Built-In Bootswatch Theme Selector
-Use init_bootswatch_stylesheet(stylename) instead of init_stylesheet() to load a Bootswatch theme!
-https://github.com/amazonshitcarshow/BootstraPHP/wiki/Bootswatch-Themes
+## Install via composer
 
-This wrapper is still highly experimental. As of now, Navbars, Alerts, Badges, Pills, Buttons, Cards, List Groups (partially), Breadcrumbs, Jumbotrons and Spinners are implemented.
+To install via composer, run `composer require tuxnull/bootstraphp`. If this method doesn't work, try installing manually.
+
+## Install manually
+
+To install BootstraPHP manually, download bootstrap.php and include the following statement in your PHP scripts: `include ("bootstrap.php");`
+
+
+This wrapper is still highly experimental. If you experience any bugs or have any suggestions feel free to let us know via the Issues tab on our GitHub page.
 
 To get started with BootstraPHP check out the Wiki section on our GitHub page (https://github.com/amazonshitcarshow/BootstraPHP/wiki)
