@@ -1,11 +1,13 @@
 # BootstraPHP
 A Bootstrap wrapper for PHP
 
+Join our Discord! https://discord.gg/QjejxKm
+
 ## Install via composer
 
-To install the latest release via composer, run `composer require tuxnull/bootstraphp`. 
+To install the latest release via composer, run `composer require tuxnull/bootstraphp`.
 
-To install the latest dev-release via composer, run `composer require tuxnull/bootstraphp:dev-master`. 
+To install the latest dev-release via composer, run `composer require tuxnull/bootstraphp:dev-master`.
 
 If installing via composer doesn't work, try installing manually.
 
