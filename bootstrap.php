@@ -317,7 +317,7 @@ function card_content($args, $content){
     }
 
     if(array_key_exists("subtitle", $args)){
-        $subtitle = $args["card_header"];
+        $subtitle = $args["subtitle"];
     }else{
         $subtitle = "";
     }
@@ -343,8 +343,21 @@ function no_arg(){
     return "";
 }
 
-function collapsible_div($content, $id, $show){
-    if($show == "true"){
+function collapsible_div($args, $content){
+
+    if(array_key_exists("show", $args)){
+        $show = $args["show"];
+    }else{
+        $show = false;
+    }
+
+    if(array_key_exists("id", $args)){
+        $id = $args["id"];
+    }else{
+        $id = "";
+    }
+
+    if($show == true){
         $show = "show";
     }else{
         $show = "";
@@ -364,15 +377,28 @@ function breadcrumb($content){
     </nav>';
 }
 
-function breadcrumb_item($links_to, $content, $active){
+function breadcrumb_item($args, $content){
+
+    if(array_key_exists("links_to", $args)){
+        $links_to = $args["links_to"];
+    }else{
+        $links_to = "";
+    }
+
+    if(array_key_exists("active", $args)){
+        $active = $args["active"];
+    }else{
+        $active = false;
+    }
+
     if($links_to == ""){
-        if($active == "true"){
+        if($active == true){
             return '<li class="breadcrumb-item active"><a href="'.$links_to.'">'.$content.'</a></li>';
         }else{
             return '<li class="breadcrumb-item"><a href="'.$links_to.'">'.$content.'</a></li>';
         }
     }else{
-        if($active == "true"){
+        if($active == true){
             return '<li class="breadcrumb-item active">'.$content.'</li>';
         }else{
             return '<li class="breadcrumb-item">'.$content.'</li>';
@@ -380,8 +406,16 @@ function breadcrumb_item($links_to, $content, $active){
     }
 }
 
-function jumbotron($content, $fluid){
-    if($fluid == "true"){
+function jumbotron($args, $content){
+
+    if(array_key_exists("fluid", $args)){
+        $fluid = $args["fluid"];
+    }else{
+        $fluid = false;
+    }
+
+
+    if($fluid == true){
         $fluid = "jumbotron-fluid";
     }else{
         $fluid = "";
@@ -393,7 +427,33 @@ function jumbotron($content, $fluid){
     </div>';
 }
 
-function jumbotron_content($title, $lead_text, $content, $links_to, $button_text){
+function jumbotron_content($args, $content){
+
+    if(array_key_exists("lead_text", $args)){
+        $lead_text = $args["lead_text"];
+    }else{
+        $lead_text = "";
+    }
+
+    if(array_key_exists("title", $args)){
+        $title = $args["title"];
+    }else{
+        $title = "";
+    }
+
+    if(array_key_exists("links_to", $args)){
+        $links_to = $args["links_to"];
+    }else{
+        $links_to = "";
+    }
+
+    if(array_key_exists("button_text", $args)){
+        $button_text = $args["button_text"];
+    }else{
+        $button_text = "";
+    }
+
+
     if($lead_text == ""){
         $lead_text == "";
     }else{
