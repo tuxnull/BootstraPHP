@@ -453,7 +453,6 @@ function jumbotron_content($args, $content){
         $button_text = "";
     }
 
-
     if($lead_text == ""){
         $lead_text == "";
     }else{
@@ -461,10 +460,14 @@ function jumbotron_content($args, $content){
         <hr class="my-4">';
     }
 
+    if($button_text != ""){
+        $button_text = '<a class="btn btn-primary btn-lg" href="'.$links_to.'" role="button">'.$button_text.'</a>';
+    }
+
     return '<h1 class="display-4">'.$title.'</h1>
     '.$lead_text.'
     <p>'.$content.'</p>
-    <a class="btn btn-primary btn-lg" href="'.$links_to.'" role="button">'.$button_text.'</a>';
+    '.$button_text;
 }
 
 function spinner($args){
