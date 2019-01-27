@@ -314,7 +314,7 @@ function table($content, $dark, $striped, $bordered, $hover){
         $bordered = "table-bordered ";
     }
     if($hover != ""){
-        $hover = "table-haver ";
+        $hover = "table-hover ";
     }
 
     return '<table class="table '.$dark." ".$striped." ".$bordered."".$hover.'">'.$content.'</table>';
