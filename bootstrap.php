@@ -673,7 +673,7 @@ function form($args, $content){
     }
 
     if($enctype != ""){
-        $enctype = 'enctype="'..$enctype'"';
+        $enctype = 'enctype="'.$enctype.'"';
     }
 
     return '<form action="'.$action.'" method="'.$method.'" '.$enctype.'>'.$content.'</form>';
