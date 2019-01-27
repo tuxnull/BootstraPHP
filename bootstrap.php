@@ -467,7 +467,28 @@ function jumbotron_content($args, $content){
     <a class="btn btn-primary btn-lg" href="'.$links_to.'" role="button">'.$button_text.'</a>';
 }
 
-function spinner($type, $style, $alt){
+function spinner($args){
+
+    if(array_key_exists("type", $args)){
+        $type = $args["type"];
+    }else{
+        return '<b>BootstraPHP has encountered an error: spinner is missing required argument "type"';
+    }
+
+    if(array_key_exists("style", $args)){
+        $style = $args["style"];
+    }else{
+        return '<b>BootstraPHP has encountered an error: spinner is missing required argument "style"';
+    }
+
+    if(array_key_exists("alt", $args)){
+        $alt = $args["alt"];
+    }else{
+        $alt = "";
+    }
+
+
+
     if($type == "border"){
         return '<div class="spinner-border text-'.$style.'" role="status"><span class="sr-only">'.$alt.'</span></div>';
     }else if($type == "growing"){
@@ -491,7 +512,14 @@ function container($content){
     return '<div class="container">'.$content.'</div>';
 }
 
-function grid_row($content, $horizontal_alignment){
+function grid_row($args, $content){
+
+    if(array_key_exists("horizontal_alignment", $args)){
+        $horizontal_alignment = $args["horizontal_alignment"];
+    }else{
+        $horizontal_alignment = "";
+    }
+
     if($horizontal_alignment == ""){
         return '<div class="row">'.$content.'</div>';
     }else{
@@ -500,12 +528,25 @@ function grid_row($content, $horizontal_alignment){
 
 }
 
-function col($class_prefix, $units, $content){
-    if($class_prefix == ""){
+function col($args, $content){
 
+    if(array_key_exists("class_prefix", $args)){
+        $class_prefix = $args["class_prefix"];
     }else{
+        $class_prefix = "";
+    }
+
+    if(array_key_exists("units", $args)){
+        $units = $args["units"];
+    }else{
+        $units = "";
+    }
+
+
+    if($class_prefix != ""){
         $class_prefix = "-".$class_prefix;
     }
+
     if($units>12){
         echo '"<meta name="bootstraPHP_warning" content="Using a column with more than 12 width-units is not recommended!">';
     }
@@ -519,24 +560,58 @@ function grid_break(){
     return '<div class="w-100"></div>';
 }
 
-function table($content, $dark, $striped, $bordered, $hover){
-    if($dark != ""){
+function table($args, $content){
+
+    if(array_key_exists("dark", $args)){
+        $dark = $args["dark"];
+    }else{
+        $dark = false;
+    }
+
+    if(array_key_exists("striped", $args)){
+        $striped = $args["striped"];
+    }else{
+        $striped = false;
+    }
+
+    if(array_key_exists("bordered", $args)){
+        $bordered = $args["bordered"];
+    }else{
+        $bordered = false;
+    }
+
+    if(array_key_exists("hover", $args)){
+        $hover = $args["hover"];
+    }else{
+        $hover = false;
+    }
+
+
+
+    if($dark == true){
         $dark = "table-dark";
     }
-    if($striped != ""){
+    if($striped == true){
         $striped = "table-striped ";
     }
-    if($bordered != ""){
+    if($bordered == true){
         $bordered = "table-bordered ";
     }
-    if($hover != ""){
+    if($hover == true){
         $hover = "table-hover ";
     }
 
     return '<table class="table '.$dark." ".$striped." ".$bordered."".$hover.'">'.$content.'</table>';
 }
 
-function table_head($style, $content){
+function table_head($args, $content){
+
+    if(array_key_exists("style", $args)){
+        $style = $args["style"];
+    }else{
+        $style = "";
+    }
+
     if($style == ""){
         return '<thead><tr>'.$content.'</tr></thead>';
     }else{
@@ -544,7 +619,14 @@ function table_head($style, $content){
     }
 }
 
-function table_th($scope, $content){
+function table_th($args, $content){
+
+    if(array_key_exists("scope", $args)){
+        $scope = $args["scope"];
+    }else{
+        $scope = "";
+    }
+
     return '<th scope="'.$scope.'">'.$content.'</th>';
 }
 
@@ -556,18 +638,79 @@ function table_row($content){
     return '<tr>'.$content.'</tr>';
 }
 
-function table_td($colspan, $content){
+function table_td($args, $content){
+
+    if(array_key_exists("colspan", $args)){
+        $colspan = $args["colspan"];
+    }else{
+        $colspan = "";
+    }
+
     if($colspan != ""){
         return '<td colspan="'.$colspan.'">'.$content.'</td>';
     }
     return '<td>'.$content.'</td>';
 }
 
-function form($action, $method, $enctype, $content){
+function form($args, $content){
+
+    if(array_key_exists("action", $args)){
+        $action = $args["action"];
+    }else{
+        return '<b>BootstraPHP has encountered an error: form is missing required argument "action"';
+    }
+
+    if(array_key_exists("method", $args)){
+        $method = $args["method"];
+    }else{
+        return '<b>BootstraPHP has encountered an error: form is missing required argument "method"';
+    }
+
+    if(array_key_exists("enctype", $args)){
+        $enctype = $args["enctype"];
+    }else{
+        $enctype = "";
+    }
+
+    if($enctype != ""){
+        $enctype = 'enctype="'..$enctype'"';
+    }
+
     return '<form action="'.$action.'" method="'.$method.'" '.$enctype.'>'.$content.'</form>';
 }
 
-function form_input($type, $label, $placeholder, $prepend, $append, $name){
+function form_input($args){
+
+    if(array_key_exists("prepend", $args)){
+        $prepend = $args["prepend"];
+    }else{
+        $prepend = "";
+    }
+
+    if(array_key_exists("append", $args)){
+        $append = $args["append"];
+    }else{
+        $append = "";
+    }
+
+    if(array_key_exists("type", $args)){
+        $type = $args["type"];
+    }else{
+        return '<b>BootstraPHP has encountered an error: form_input is missing required argument "type"';
+    }
+
+    if(array_key_exists("placeholder", $args)){
+        $placeholder = $args["placeholder"];
+    }else{
+        $placeholder = "";
+    }
+
+    if(array_key_exists("name", $args)){
+        $name = $args["name"];
+    }else{
+        $name = "";
+    }
+
     if($prepend != ""){
         $prepend = '<div class="input-group-prepend">
         <span class="input-group-text" id="basic-addon1">'.$prepend.'</span>
@@ -595,7 +738,32 @@ function input_group_prepend($content){
     return '<div class="input-group-prepend">'.$content.'</div>';
 }
 
-function input($type, $name, $placeholder, $id){
+function input($args){
+
+    if(array_key_exists("type", $args)){
+        $type = $args["type"];
+    }else{
+        return '<b>BootstraPHP has encountered an error: input is missing required argument "type"';
+    }
+
+    if(array_key_exists("placeholder", $args)){
+        $placeholder = $args["placeholder"];
+    }else{
+        $placeholder = "";
+    }
+
+    if(array_key_exists("name", $args)){
+        $name = $args["name"];
+    }else{
+        $name = "";
+    }
+
+    if(array_key_exists("id", $args)){
+        $id = $args["id"];
+    }else{
+        $id = "";
+    }
+
     return '<input type="'.$type.'" placeholder="'.$placeholder.'" name="'.$name.'" id="'.$id.'">';
 }
 
@@ -603,21 +771,48 @@ function input_group_append($content){
     return '<div class="input-group-append">'.$content.'</div>';
 }
 
-function pagination($aria_label, $content, $alignment){
+function pagination($args, $content){
+
+    if(array_key_exists("alignment", $args)){
+        $alignment = $args["alignment"];
+    }else{
+        $alignment = "";
+    }
+
+    if(array_key_exists("aria_label", $args)){
+        $aria_label = $args["aria_label"];
+    }else{
+        $aria_label = "";
+    }
+
     if($alignment != ""){
         $alignment = "justify-content-".$alignment;
     }
     return '<nav aria-label="'.$aria_label.'"><ul class="pagination '.$alignment.'">'.$content.'</ul></nav>';
 }
 
-function page_item($content, $disabled){
-    if($disabled == "true"){
+function page_item($args, $content){
+
+    if(array_key_exists("disabled", $args)){
+        $disabled = $args["id"];
+    }else{
+        $disabled = false;
+    }
+
+    if($disabled == true){
         $disabled == "disabled";
     }
     return '<li class="page-item '.$disabled.'">'.$content.'</li>';
 }
 
-function page_link($links_to, $content){
+function page_link($args, $content){
+
+    if(array_key_exists("links_to", $args)){
+        $links_to = $args["links_to"];
+    }else{
+        $links_to = "";
+    }
+
     return '<a class="page-link" href="'.$links_to.'">'.$content.'</a>';
 }
 
