@@ -133,7 +133,34 @@ function navbar_element($args){
 
 }
 
-function dropdown_element($element, $links_to, $name){
+function dropdown_element($args){
+
+    if(array_key_exists("element", $args)){
+        $element = $args["element"];
+    }else{
+        return '<b>BootstraPHP has encountered an error: dropdown_element is missing required argument "element"';
+    }
+
+    if(array_key_exists("links_to", $args)){
+        if($args["links_to"]){
+            $links_to = $args["links_to"];
+        }else{
+            $links_to = "";
+        }
+    }else{
+        $links_to = "";
+    }
+
+    if(array_key_exists("name", $args)){
+        if($args["name"]){
+            $name = $args["name"];
+        }else{
+            $name = "";
+        }
+    }else{
+        $name = "";
+    }
+
     if($element == "link"){
         return '<a class="dropdown-item" href="'.$links_to.'">'.$name.'</a>';
     }
@@ -179,8 +206,34 @@ function pill($content, $style){
     return '<span class="badge badge-pill badge-'.$style.'">'.$content.'</span>';
 }
 
-function custom_link($element, $links_to, $content, $style, $disabled){
-    if($disabled == "true"){
+function custom_link($args, $content){
+
+    if(array_key_exists("element",$args)){
+        $element = $args["element"];
+    }else{
+        return '<b>BootstraPHP has encountered an error: custom_link is missing required argument "element"';
+    }
+
+    if(array_key_exists("links_to",$args)){
+        $links_to = $args["links_to"];
+    }else{
+        return '<b>BootstraPHP has encountered an error: custom_link is missing required argument "links_to"';
+    }
+
+    if(array_key_exists("style",$args)){
+        $style = $args["style"];
+    }else{
+        return '<b>BootstraPHP has encountered an error: custom_link is missing required argument "style"';
+    }
+
+    if(array_key_exists("disabled",$args)){
+        $disabled = $args["disabled"];
+    }else{
+        $disabled = false;
+    }
+
+    
+    if($disabled == true){
         $disabled = "disabled";
     }else{
         $disabled = "";
