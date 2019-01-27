@@ -3,7 +3,11 @@ A Bootstrap wrapper for PHP
 
 ## Install via composer
 
-To install via composer, run `composer require tuxnull/bootstraphp`. If this method doesn't work, try installing manually.
+To install the latest release via composer, run `composer require tuxnull/bootstraphp`. 
+
+To install the latest dev-release via composer, run `composer require tuxnull/bootstraphp:dev-master`. 
+
+If installing via composer doesn't work, try installing manually.
 
 ## Install manually
 
