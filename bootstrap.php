@@ -106,22 +106,23 @@ function navbar_finish(){
     </nav><meta name="bootstraPHP_warning" content="navbar_finish() is deprecated - do not use this statement">';
 }
 
-$alert_args = array(
-  'content' => 'Hello World',
-  'style' => 'warning',
-  'dismisable' => true
-);
-
-function alert($alert_args){
-
-  if ($alert_args['dismisable'] == true) {
-    return '<div class="alert alert-'.$alert_args['style'].'" role="alert">'.$alert_args['content'].'<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-    </button></div>';
-  } else {
-    return '<div class="alert alert-'.$alert_args['style'].'" role="alert">'.$alert_args['content'].'</div>';
-  }
-
+function alert($args){
+    if(array_key_exists("dismissable",$args)){ #Dismissable attribute is optional, doesnt need to be included in the array this way
+        if($args["dismissable"] == true){
+            $dismissable = false;
+        }else{
+            $dismissable = false;
+        }
+    }else{
+        $dismissable = false;
+    }
+    if ($dismissable == true) {
+        return '<div class="alert alert-'.$args['style'].'" role="alert">'.$args['content'].'<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button></div>';
+    } else {
+        return '<div class="alert alert-'.$args['style'].'" role="alert">'.$args['content'].'</div>';
+    }
 }
 
 function badge($content, $style){
