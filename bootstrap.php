@@ -774,52 +774,6 @@ function input_group_append($content){
     return '<div class="input-group-append">'.$content.'</div>';
 }
 
-function pagination($args, $content){
-
-    if(array_key_exists("alignment", $args)){
-        $alignment = $args["alignment"];
-    }else{
-        $alignment = "";
-    }
-
-    if(array_key_exists("aria_label", $args)){
-        $aria_label = $args["aria_label"];
-    }else{
-        $aria_label = "";
-    }
-
-    if($alignment != ""){
-        $alignment = "justify-content-".$alignment;
-    }
-    return '<nav aria-label="'.$aria_label.'"><ul class="pagination '.$alignment.'">'.$content.'</ul></nav>';
-}
-
-function page_item($args, $content){
-
-    if(array_key_exists("disabled", $args)){
-        $disabled = $args["id"];
-    }else{
-        $disabled = false;
-    }
-
-    if($disabled == true){
-        $disabled == "disabled";
-    }
-    return '<li class="page-item '.$disabled.'">'.$content.'</li>';
-}
-
-function page_link($args, $content){
-
-    if(array_key_exists("links_to", $args)){
-        $links_to = $args["links_to"];
-    }else{
-        return '<b>BootstraPHP has encountered an error: page_link is missing required argument "links_to"';
-    }
-
-    return '<a class="page-link" href="'.$links_to.'">'.$content.'</a>';
-}
-
-
 
 
 
