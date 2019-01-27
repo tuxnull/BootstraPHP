@@ -347,6 +347,46 @@ function table_td($colspan, $content){
     return '<td>'.$content.'</td>';
 }
 
+function form($action, $method, $enctype, $content){
+    return '<form action="'.$action.'" method="'.$method.'" '.$enctype.'>'.$content.'</form>';
+}
+
+function form_input($type, $label, $placeholder, $prepend, $append, $name){
+    if($prepend != ""){
+        $prepend = '<div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1">'.$prepend.'</span>
+        </div>';
+    }
+
+    if($append != ""){
+        $append = '<div class="input-group-append">
+        <span class="input-group-text" id="basic-addon1">'.$append.'</span>
+        </div>';
+    }
+
+    return '<div class="input-group mb-3">
+    '.$prepend.'
+    <input type="'.$type.'" class="form-control" placeholder="'.$placeholder.'" aria-label="'.$placeholder.'" aria-describedby="basic-addon1" name="'.$name.'">
+    '.$append.'
+    </div>';
+}
+
+function input_group($content){
+    return '<div class="input-group mb-3">'.$content.'</div>';
+}
+
+function input_group_prepend($content){
+    return '<div class="input-group-prepend">'.$content.'</div>';
+}
+
+function input($type, $name, $placeholder, $id){
+    return '<input type="'.$type.'" placeholder="'.$placeholder.'" name="'.$name.'" id="'.$id.'">';
+}
+
+function input_group_append($content){
+    return '<div class="input-group-append">'.$content.'</div>';
+}
+
 
 
 

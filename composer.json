@@ -12,7 +12,6 @@
             "role": "Developer"
         }
     ],
-    "require": {
-        "php": ">=5.0.4"
-    }
+    "minimum-stability": "dev",
+    "require": {}
 }
