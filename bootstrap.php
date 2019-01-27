@@ -442,7 +442,7 @@ function jumbotron_content($args, $content){
     }
 
     if(array_key_exists("links_to", $args)){
-        $links_to = $args["links_to"];
+        $links_to = 'href="'.$args["links_to"].'"';
     }else{
         $links_to = "";
     }
@@ -456,16 +456,46 @@ function jumbotron_content($args, $content){
     if($lead_text == ""){
         $lead_text == "";
     }else{
-        $lead_text = '<p class="lead">'.$lead_text.'</p>
-        <hr class="my-4">';
+        $lead_text = '<p class="lead">'.$lead_text.'</p>';
     }
+
+    if(array_key_exists("spacer", $args)){
+        $spacer = $args["spacer"];
+    }else{
+        $spacer = '<hr class="my-4">';
+    }
+
+    if(array_key_exists("button_type", $args)){
+        $button_type = $args["button_type"];
+    }else{
+        $button_type = "a";
+    }
+
+    if(array_key_exists("button_style", $args)){
+        $button_style = $args["button_style"];
+    }else{
+        $button_style = "btn btn-primary btn-lg";
+    }
+
+    if(array_key_exists("title_tag", $args)){
+        $title_tag = $args["title_tag"];
+    }else{
+        $title_tag = "h1";
+    }
+
+    if(array_key_exists("title_class", $args)){
+        $title_tag = $args["title_class"];
+    }else{
+        $title_tag = "display_4";
+    }
+
 
     if($button_text != ""){
-        $button_text = '<a class="btn btn-primary btn-lg" href="'.$links_to.'" role="button">'.$button_text.'</a>';
+        $button_text = '<'.$button_type.' class="'.$button_style.'" href="'.$links_to.'" role="button">'.$button_text.'</'.$button_type.'>';
     }
 
-    return '<h1 class="display-4">'.$title.'</h1>
-    '.$lead_text.'
+    return '<'.$title_tag.' class="'.$title_class.'">'.$title.'</'.$title_tag.'>
+    '.$lead_text.$spacer'
     <p>'.$content.'</p>
     '.$button_text;
 }
