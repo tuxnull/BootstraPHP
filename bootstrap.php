@@ -176,7 +176,6 @@ function navbar_finish(){
     </nav><meta name="bootstraPHP_warning" content="navbar_finish() is deprecated - do not use this statement">';
 }
 
-<<<<<<< HEAD
 
 $alert_args = array(
   'content' => 'I can be a string or var',
@@ -194,7 +193,7 @@ function alert($alert_args){
     return '<div class="alert alert-'.$alert_args['style'].'" role="alert">'.$alert_args['content'].'</div>';
   }
 
-=======
+
 function alert($args){
     if(array_key_exists("dismissable",$args)){ #Dismissable attribute is optional, doesnt need to be included in the array this way
         if($args["dismissable"] == true){
@@ -212,7 +211,7 @@ function alert($args){
     } else {
         return '<div class="alert alert-'.$args['style'].'" role="alert">'.$args['content'].'</div>';
     }
->>>>>>> c5105e96b8ccee2281cb2949376541e69d9b65d9
+
 }
 
 
@@ -453,6 +452,18 @@ function jumbotron_content($args, $content){
         $lead_text = "";
     }
 
+    if(array_key_exists("title_tag", $args)){
+        $title_tag = $args["title_tag"];
+    }else{
+        $title_tag = "h1";
+    }
+
+    if(array_key_exists("title_class", $args)){
+        $title_tag = $args["title_class"];
+    }else{
+        $title_tag = "display-4";
+    }
+
     if(array_key_exists("title", $args)){
         $title = $args["title"];
     }else{
@@ -460,7 +471,7 @@ function jumbotron_content($args, $content){
     }
 
     if(array_key_exists("links_to", $args)){
-        $links_to = $args["links_to"];
+        $links_to = 'href='.$args["links_to"].'"';
     }else{
         $links_to = "";
     }
@@ -474,15 +485,35 @@ function jumbotron_content($args, $content){
     if($lead_text == ""){
         $lead_text == "";
     }else{
-        $lead_text = '<p class="lead">'.$lead_text.'</p>
-        <hr class="my-4">';
+        $lead_text = '<p class="lead">'.$lead_text.'</p>';
+    }
+
+    if(array_key_exists("spacer", $args)){
+      return $args['spacer'];2
+    } else {
+      return '<hr class="my-4">';
+    }
+
+
+    if (array_key_exists("button_type", $args)){
+      $button_type = $args["button_type"];
+    } else {
+      $button_type = "a";
+    }
+
+    if (array_key_exists("button_style", $args)){
+      $button_type = $args["button_type"];
+    } else {
+      $button_type = "btn btn-primary btn-lg";
     }
 
     if($button_text != ""){
-        $button_text = '<a class="btn btn-primary btn-lg" href="'.$links_to.'" role="button">'.$button_text.'</a>';
+        $button_text = '<'.$button_type.' class="'.$button_style.'" '.$links_to.' role="button">'.$button_text.'</'.$button_type.'>';
     }
 
-    return '<h1 class="display-4">'.$title.'</h1>
+
+
+    return '<'.$title_tag.' class="'.$title_class.'">'.$title.'</'.$title_tag.'>
     '.$lead_text.'
     <p>'.$content.'</p>
     '.$button_text;
