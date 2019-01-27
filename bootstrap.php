@@ -106,14 +106,22 @@ function navbar_finish(){
     </nav><meta name="bootstraPHP_warning" content="navbar_finish() is deprecated - do not use this statement">';
 }
 
-function alert($content, $style){
-    return '<div class="alert alert-'.$style.'" role="alert">'.$content.'</div>';
-}
+$alert_args = array(
+  'content' => 'Hello World',
+  'style' => 'warning',
+  'dismisable' => true
+);
 
-function dismissable_alert($content, $style){
-    return '<div class="alert alert-'.$style.'" role="alert">'.$content.'<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+function alert($alert_args){
+
+  if ($alert_args['dismisable'] == true) {
+    return '<div class="alert alert-'.$alert_args['style'].'" role="alert">'.$alert_args['content'].'<button type="button" class="close" data-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">&times;</span>
     </button></div>';
+  } else {
+    return '<div class="alert alert-'.$alert_args['style'].'" role="alert">'.$alert_args['content'].'</div>';
+  }
+
 }
 
 function badge($content, $style){
