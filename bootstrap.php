@@ -354,7 +354,7 @@ function collapsible_div($args, $content){
     if(array_key_exists("id", $args)){
         $id = $args["id"];
     }else{
-        $id = "";
+        return '<b>BootstraPHP has encountered an error: collapsible_div is missing required argument "id"';
     }
 
     if($show == true){
