@@ -23,7 +23,27 @@ function init_js(){
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>';
 }
 
-function init_navbar($style, $brand, $links_to, $content){
+function init_navbar($args, $content){
+
+    if(array_key_exists("style",$args)){
+        $style = $args["style"];
+    }else{
+        return '<b>BootstraPHP has encountered an error: init_navbar is missing required argument "style"';
+    }
+
+    if(array_key_exists("links_to",$args)){
+        $links_to = $args["links_to"];
+    }else{
+        return '<b>BootstraPHP has encountered an error: init_navbar is missing required argument "links_to"';
+    }
+
+    if(array_key_exists("brand",$args)){
+        $brand = $args["brand"];
+    }else{
+        return '<b>BootstraPHP has encountered an error: init_navbar is missing required argument "brand"';
+    }
+
+
     return '<nav class="navbar navbar-expand-lg navbar-'.$style.' bg-'.$style.'">
     <a class="navbar-brand" href="'.$links_to.'">'.$brand.'</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -387,6 +407,24 @@ function input($type, $name, $placeholder, $id){
 
 function input_group_append($content){
     return '<div class="input-group-append">'.$content.'</div>';
+}
+
+function pagination($aria_label, $content, $alignment){
+    if($alignment != ""){
+        $alignment = "justify-content-".$alignment;
+    }
+    return '<nav aria-label="'.$aria_label.'"><ul class="pagination '.$alignment.'">'.$content.'</ul></nav>';
+}
+
+function page_item($content, $disabled){
+    if($disabled == "true"){
+        $disabled == "disabled";
+    }
+    return '<li class="page-item '.$disabled.'">'.$content.'</li>';
+}
+
+function page_link($links_to, $content){
+    return '<a class="page-link" href="'.$links_to.'">'.$content.'</a>';
 }
 
 
