@@ -3,6 +3,11 @@ A Bootstrap wrapper for PHP
 
 Join our Discord! https://discord.gg/QjejxKm
 
+## Upgrading
+
+When upgrading from Pre-0.1.0 versions to 0.1.0 or above, read this wiki entry:
+https://github.com/tuxnull/BootstraPHP/wiki/Upgrading-from-Pre-0.1.0-Versions-to-0.1.0-and-above
+
 ## Install via composer
 
 To install the latest release via composer, run `composer require tuxnull/bootstraphp`.
