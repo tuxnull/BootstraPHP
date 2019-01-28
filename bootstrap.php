@@ -354,8 +354,13 @@ function card_list_group($content){
     <div class="card-body">';
 }
 
-function list_group_item($content){
-    return '<li class="list-group-item">'.$content.'</li>';
+function list_group_item($args, $content){
+
+    if(array_key_exists("style",$args)){
+        $style = "list-group-item-".$args["style"];
+    }
+
+    return '<li class="list-group-item '.$style.'">'.$content.'</li>';
 }
 
 function no_arg(){
@@ -870,7 +875,9 @@ function page_link($args, $content){
     return '<a class="page-link" href="'.$links_to.'">'.$content.'</a>';
 }
 
-
+function list_group($content){
+    return '<ul class="list-group">'.$content.'</ul>';
+}
 
 
 
