@@ -358,6 +358,8 @@ function list_group_item($args, $content){
 
     if(array_key_exists("style",$args)){
         $style = "list-group-item-".$args["style"];
+    }else{
+        $style = "";
     }
 
     return '<li class="list-group-item '.$style.'">'.$content.'</li>';
