@@ -929,5 +929,31 @@ function ext_footer($content){
     </footer>';
 }
 
+function button_group($args, $content){
+    if(array_key_exists("sizing",$args)){
+        $sizing = "btn-group-".$args["sizing"];
+    }else{
+        $sizing = "";
+    }
+    
+    if(array_key_exists("vertical",$args)){
+        $vertical = $args["vertical"];
+    }else{
+        $vertical = false;
+    }
+
+    if($vertical == true){
+        $vertical = "-vertical";
+    }
+
+    return sprintf('<div class="btn-group%s %s" role="group" aria-label="Basic example">%s</div>',$vertical,$sizing,$content);
+}
+
+function button_toolbar($content){
+    return sprintf('<div class="btn-toolbar" role="toolbar">%s</div>',$content);
+}
+
+
+
 
 ?>
