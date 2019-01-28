@@ -106,6 +106,18 @@ function navbar_element($args){
         $dropdown_id = "";
     }
 
+    if(array_key_exists("lead_link_id",$args)){
+        $lead_link_id = $args["lead_link_id"];
+    }else{
+        $lead_link_id = "";
+    }
+
+    if(array_key_exists("lead_link_element",$args)){
+        $lead_link_element = $args["lead_link_element"];
+    }else{
+        $lead_link_element = "a";
+    }
+
 
     if($element == "link"){
         if($active == true){
@@ -125,13 +137,13 @@ function navbar_element($args){
         </li>',$links_to,$dropdown_id,$name,$dcontent);
     }
     if($element == "search"){
-        return '<form class="form-inline my-2 my-lg-0" action="'.$links_to.'" method="'.$returl.'">
-        <input class="form-control mr-sm-2" type="search" placeholder="'.$name.'" aria-label="'.$name.'" name="query">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">'.$name.'</button>
-        </form>';
+        return sprintf('<form class="form-inline my-2 my-lg-0" action="%s" method="%s">
+        <input class="form-control mr-sm-2" type="search" placeholder="%s" aria-label="%s" name="query">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">%s</button>
+        </form>',$links_to,$returl,$name,$name,$name);
     }
     if($element == "lead_link"){
-        return '<a class="btn btn-outline-'.$style.' my-2 my-sm-0" href="'.$links_to.'">'.$name.'</a>';
+        return sprintf('<%s class="btn btn-outline-%s my-2 my-sm-0" id="%s" href="%s">%s</%s>',$lead_link_element,$style,$lead_link_id,$links_to,$name,$lead_link_element);
     }
 
 }
