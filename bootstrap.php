@@ -150,12 +150,6 @@ function navbar_element($args){
 
 function dropdown_element($args){
 
-    if(array_key_exists("element", $args)){
-        $element = $args["element"];
-    }else{
-        return '<b>BootstraPHP has encountered an error: dropdown_element is missing required argument "element"';
-    }
-
     if(array_key_exists("links_to", $args)){
         if($args["links_to"]){
             $links_to = $args["links_to"];
