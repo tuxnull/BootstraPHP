@@ -177,7 +177,7 @@ function dropdown_element($args){
     }
 
     if($element == "link"){
-        return '<a class="dropdown-item" href="'.$links_to.'">'.$name.'</a>';
+        return sprintf('<a class="dropdown-item" href="%s">%s</a>',$links_to,$name);
     }
 
     if($element == "divider"){
@@ -194,22 +194,26 @@ function navbar_finish(){
     </nav><meta name="bootstraPHP_warning" content="navbar_finish() is deprecated - do not use this statement">';
 }
 
-function alert($args){
+function alert($args, $content){
     if(array_key_exists("dismissable",$args)){ #Dismissable attribute is optional, doesnt need to be included in the array this way
-        if($args["dismissable"] == true){
-            $dismissable = false;
-        }else{
-            $dismissable = false;
-        }
+        $dismissable = $args["dismissable"];
     }else{
         $dismissable = false;
     }
+
+    if(array_key_exists("style",$args)){ #Dismissable attribute is optional, doesnt need to be included in the array this way
+        $style = $args["style"];
+    }else{
+        return '<b>BootstraPHP has encountered an error: alert is missing required argument "style"';
+    }
+
+
     if ($dismissable == true) {
-        return '<div class="alert alert-'.$args['style'].'" role="alert">'.$args['content'].'<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        return sprintf('<div class="alert alert-%s" role="alert">%s<button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
-        </button></div>';
+        </button></div>',$style,$content);
     } else {
-        return '<div class="alert alert-'.$args['style'].'" role="alert">'.$args['content'].'</div>';
+        return sprintf('<div class="alert alert-%s" role="alert">%s</div>',$style,$content);
     }
 }
 
