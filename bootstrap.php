@@ -505,9 +505,9 @@ function jumbotron_content($args, $content){
     }
 
     if(array_key_exists("title_class", $args)){
-        $title_tag = $args["title_class"];
+        $title_class = $args["title_class"];
     }else{
-        $title_tag = "display_4";
+        $title_class = "display_4";
     }
 
 
