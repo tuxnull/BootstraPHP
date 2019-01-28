@@ -495,7 +495,7 @@ function jumbotron_content($args, $content){
     }
 
     return '<'.$title_tag.' class="'.$title_class.'">'.$title.'</'.$title_tag.'>
-    '.$lead_text.$spacer'
+    '.$lead_text.$spacer.'
     <p>'.$content.'</p>
     '.$button_text;
 }
