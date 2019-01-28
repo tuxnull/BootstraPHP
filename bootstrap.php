@@ -1009,20 +1009,7 @@ function carousel($content, $args){
  }
 
 
-  return sprintf('<div %s $s %s %s %s %s %s %s >', $id, $class, $autoplay, $interval, $keyboard, $pause, $wrap);
-  return '<div class="carousel-inner">';
-
-
-  return $content;
-
-  return '</div>';
-
-  return $controls;
-
-  return '</div>';
-
-
-
+  return sprintf('<div %s $s %s %s %s %s %s %s >', $id, $class, $autoplay, $interval, $keyboard, $pause, $wrap) . '<div class="carousel-inner">' . $content; .'</div>' . $controls .'</div>';
 
 }
 
@@ -1059,21 +1046,16 @@ function carousel_item($content, $args){
     $caption = '';
   }
 
-return sprintf('<div %s >' $slide_class);
 
-return sprintf('<div %s %s >', $img_class, $src, $alt);
-
-
-if ($caption == true){
+  if ($caption == true){
 
 
-return sprintf('<div %s><%s></%s>%s<%s>%s</%s></div>' $caption_classes, $heading_element, $heading_content, $paragraph_element, $paragraph_content );
+  $caption = sprintf('<div %s><%s></%s>%s<%s>%s</%s></div>' $caption_classes, $heading_element, $heading_content, $paragraph_element, $paragraph_content );
 
-}
+  }
 
 
-
-return '</div>';
+return sprintf('<div %s >' $slide_class) . sprintf('<div %s %s >', $img_class, $src, $alt) . $caption . '</div>';
 
 
 
