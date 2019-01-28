@@ -94,8 +94,8 @@ function navbar_element($args){
         $dcontent = "";
     }
 
-    if(array_key_exists("return_url",$args)){
-        $returl = $args["return_url"];
+    if(array_key_exists("return_method",$args)){
+        $returl = $args["return_method"];
     }else{
         $returl = "";
     }
