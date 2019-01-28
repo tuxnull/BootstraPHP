@@ -1,8 +1,17 @@
 <?PHP
 
+echo "<!-- BootstraPHP initialized! https://github.com/tuxnull/BootstraPHP -->";
+echo "<meta name='bootstraPHP' content='https://github.com/tuxnull/BootstraPHP'>";
+echo "<meta name='bootstraPHP_docs' content='https://tuxnull.com'>";
+
+
 function init_meta(){
     return '<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">';
+}
+
+function page_title($title){
+    return '<title>'.$title.'</title>';
 }
 
 function init_stylesheet(){
@@ -14,6 +23,12 @@ function init_bootswatch_stylesheet($style){
     return '<link rel="stylesheet" href="https://bootswatch.com/4/'.$style.'/bootstrap.min.css">';
 }
 
+function init_bphp_ext($extension){
+    if($extension == "footer"){
+        return '<link rel="stylesheet" href="https://tuxnull.com/CDN/bphpext_footer.css">';
+    }
+}
+
 function init_js(){
     return '<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
@@ -21,7 +36,6 @@ function init_js(){
 }
 
 function init_navbar($args, $content){
-
     if(array_key_exists("style",$args)){
         $style = $args["style"];
     }else{
@@ -40,14 +54,14 @@ function init_navbar($args, $content){
         return '<b>BootstraPHP has encountered an error: init_navbar is missing required argument "brand"';
     }
 
-
-    return '<nav class="navbar navbar-expand-lg navbar-'.$style.' bg-'.$style.'">
-    <a class="navbar-brand" href="'.$links_to.'">'.$brand.'</a>
+    $returnstr = '<nav class="navbar navbar-expand-lg navbar-%s bg-%s">
+    <a class="navbar-brand" href="%s">%s</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">'.$content."</ul></div></nav>";
+    <ul class="navbar-nav mr-auto">%s</ul></div></nav>';
+    return sprintf($returnstr,$style,$style,$links_to,$brand,$content);
 }
 
 function navbar_element($args){
@@ -70,11 +84,7 @@ function navbar_element($args){
     }
 
     if(array_key_exists("active",$args)){
-        if($args["active"] == true){
-            $active = true;
-        }else{
-            $active = false;
-        }
+        $active = $args["active"];
     }else{
         $active = false;
     }
@@ -91,41 +101,71 @@ function navbar_element($args){
         $dcontent = "";
     }
 
-    if(array_key_exists("return_url",$args)){
-        $returl = $args["return_url"];
+    if(array_key_exists("return_method",$args)){
+        $returl = $args["return_method"];
     }else{
         $returl = "";
     }
 
-    if($element == "link"){
-        if($active == true){
-            return '<li class="nav-item active">
-            <a class="nav-link" href="'.$links_to.'">'.$name.'</a>
-            </li>';
-        }else{
-            return '<li class="nav-item">
-            <a class="nav-link" href="'.$links_to.'">'.$name.'</a>
-            </li>';
+    if(array_key_exists("dropdown_id",$args)){
+        $dropdown_id = $args["dropdown_id"];
+    }else{
+        $dropdown_id = "";
+    }
+
+    if(array_key_exists("lead_link_id",$args)){
+        $lead_link_id = $args["lead_link_id"];
+    }else{
+        $lead_link_id = "";
+    }
+
+    if(array_key_exists("lead_link_element",$args)){
+        $lead_link_element = $args["lead_link_element"];
+    }else{
+        $lead_link_element = "a";
+    }
+
+    if(array_key_exists("autodetect_active",$args)){
+        $autodetect_active = $args["autodetect_active"];
+    }else{
+        $autodetect_active = true;
+    }
+
+
+
+    if($autodetect_active == true){
+        if(pathinfo($_SERVER["SCRIPT_FILENAME"],PATHINFO_FILENAME).".".pathinfo($_SERVER["SCRIPT_FILENAME"],PATHINFO_EXTENSION) == $links_to){
+            $active = true;
+        }
+        if($links_to == "#"){
+            $active = true;
         }
     }
+
+    if($active == true){
+        $active = "active";
+    }
+
+
+    if($element == "link"){
+        return sprintf('<li class="nav-item %s">
+        <a class="nav-link" href="%s">%s</a>
+        </li>',$active,$links_to,$name);
+    }
     if($element == "dropdown"){
-        return '<li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="'.$links_to.'" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        '.$name.'
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-        '.$dcontent.'
-        </div>
-        </li>';
+        return sprintf('<li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="%s" id="%s" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">%s</a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">%s</div>
+        </li>',$links_to,$dropdown_id,$name,$dcontent);
     }
     if($element == "search"){
-        return '<form class="form-inline my-2 my-lg-0" action="'.$links_to.'" method="'.$returl.'">
-        <input class="form-control mr-sm-2" type="search" placeholder="'.$name.'" aria-label="'.$name.'" name="query">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">'.$name.'</button>
-        </form>';
+        return sprintf('<form class="form-inline my-2 my-lg-0" action="%s" method="%s">
+        <input class="form-control mr-sm-2" type="search" placeholder="%s" aria-label="%s" name="query">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">%s</button>
+        </form>',$links_to,$returl,$name,$name,$name);
     }
     if($element == "lead_link"){
-        return '<a class="btn btn-outline-'.$style.' my-2 my-sm-0" href="'.$links_to.'">'.$name.'</a>';
+        return sprintf('<%s class="btn btn-outline-%s my-2 my-sm-0" id="%s" href="%s">%s</%s>',$lead_link_element,$style,$lead_link_id,$links_to,$name,$lead_link_element);
     }
 
 }
@@ -159,7 +199,7 @@ function dropdown_element($args){
     }
 
     if($element == "link"){
-        return '<a class="dropdown-item" href="'.$links_to.'">'.$name.'</a>';
+        return sprintf('<a class="dropdown-item" href="%s">%s</a>',$links_to,$name);
     }
 
     if($element == "divider"){
@@ -176,40 +216,26 @@ function navbar_finish(){
     </nav><meta name="bootstraPHP_warning" content="navbar_finish() is deprecated - do not use this statement">';
 }
 
-
-$alert_args = array(
-  'content' => 'I can be a string or var',
-  'style' => 'warning',
-  'dismisable' => true
-);
-
-function alert($alert_args){
-
-  if ($alert_args['dismisable'] == true) {
-    return '<div class="alert alert-'.$alert_args['style'].'" role="alert">'.$alert_args['content'].'<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-    </button></div>';
-  } else {
-    return '<div class="alert alert-'.$alert_args['style'].'" role="alert">'.$alert_args['content'].'</div>';
-  }
-
-
-function alert($args){
+function alert($args, $content){
     if(array_key_exists("dismissable",$args)){ #Dismissable attribute is optional, doesnt need to be included in the array this way
-        if($args["dismissable"] == true){
-            $dismissable = false;
-        }else{
-            $dismissable = false;
-        }
+        $dismissable = $args["dismissable"];
     }else{
         $dismissable = false;
     }
+
+    if(array_key_exists("style",$args)){ #Dismissable attribute is optional, doesnt need to be included in the array this way
+        $style = $args["style"];
+    }else{
+        return '<b>BootstraPHP has encountered an error: alert is missing required argument "style"';
+    }
+
+
     if ($dismissable == true) {
-        return '<div class="alert alert-'.$args['style'].'" role="alert">'.$args['content'].'<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        return sprintf('<div class="alert alert-%s" role="alert">%s<button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
-        </button></div>';
+        </button></div>',$style,$content);
     } else {
-        return '<div class="alert alert-'.$args['style'].'" role="alert">'.$args['content'].'</div>';
+        return sprintf('<div class="alert alert-%s" role="alert">%s</div>',$style,$content);
     }
 
 }
@@ -352,8 +378,15 @@ function card_list_group($content){
     <div class="card-body">';
 }
 
-function list_group_item($content){
-    return '<li class="list-group-item">'.$content.'</li>';
+function list_group_item($args, $content){
+
+    if(array_key_exists("style",$args)){
+        $style = "list-group-item-".$args["style"];
+    }else{
+        $style = "";
+    }
+
+    return '<li class="list-group-item '.$style.'">'.$content.'</li>';
 }
 
 function no_arg(){
@@ -471,7 +504,7 @@ function jumbotron_content($args, $content){
     }
 
     if(array_key_exists("links_to", $args)){
-        $links_to = 'href='.$args["links_to"].'"';
+        $links_to = 'href="'.$args["links_to"].'"';
     }else{
         $links_to = "";
     }
@@ -489,32 +522,44 @@ function jumbotron_content($args, $content){
     }
 
     if(array_key_exists("spacer", $args)){
-      return $args['spacer'];2
-    } else {
-      return '<hr class="my-4">';
+        if($args["spacer"] == true){
+            $spacer = '<hr class="my-4">';
+        }
+    }else{
+        $spacer = "";
     }
 
-
-    if (array_key_exists("button_type", $args)){
-      $button_type = $args["button_type"];
-    } else {
-      $button_type = "a";
+    if(array_key_exists("button_type", $args)){
+        $button_type = $args["button_type"];
+    }else{
+        $button_type = "a";
     }
 
-    if (array_key_exists("button_style", $args)){
-      $button_type = $args["button_type"];
-    } else {
-      $button_type = "btn btn-primary btn-lg";
+    if(array_key_exists("button_style", $args)){
+        $button_style = $args["button_style"];
+    }else{
+        $button_style = "btn btn-primary btn-lg";
     }
+
+    if(array_key_exists("title_tag", $args)){
+        $title_tag = $args["title_tag"];
+    }else{
+        $title_tag = "h1";
+    }
+
+    if(array_key_exists("title_class", $args)){
+        $title_class = $args["title_class"];
+    }else{
+        $title_class = "display-4";
+    }
+
 
     if($button_text != ""){
         $button_text = '<'.$button_type.' class="'.$button_style.'" '.$links_to.' role="button">'.$button_text.'</'.$button_type.'>';
     }
 
-
-
     return '<'.$title_tag.' class="'.$title_class.'">'.$title.'</'.$title_tag.'>
-    '.$lead_text.'
+    '.$lead_text.$spacer.'
     <p>'.$content.'</p>
     '.$button_text;
 }
@@ -582,30 +627,49 @@ function grid_row($args, $content){
 
 function col($args, $content){
 
-    if(array_key_exists("class_prefix", $args)){
-        $class_prefix = $args["class_prefix"];
-    }else{
-        $class_prefix = "";
+    $class = "";
+
+    if(array_key_exists("col", $args)){
+        if($args["col"] == "auto"){
+            $class = $class . "col";
+        }else{
+            $class = $class . " col-".$args["col"];
+        }
     }
 
-    if(array_key_exists("units", $args)){
-        $units = $args["units"];
-    }else{
-        $units = "";
+    if(array_key_exists("col-sm", $args)){
+        if($args["col-sm"] == "auto"){
+            $class = $class . "col-sm";
+        }else{
+            $class = $class . " col-sm-".$args["col-sm"];
+        }
     }
 
-
-    if($class_prefix != ""){
-        $class_prefix = "-".$class_prefix;
+    if(array_key_exists("col-md", $args)){
+        if($args["col-md"] == "auto"){
+            $class = $class . "col-md";
+        }else{
+            $class = $class . " col-md-".$args["col-md"];
+        }
     }
 
-    if($units>12){
-        echo '"<meta name="bootstraPHP_warning" content="Using a column with more than 12 width-units is not recommended!">';
+    if(array_key_exists("col-lg", $args)){
+        if($args["col-lg"] == "auto"){
+            $class = $class . "col-lg";
+        }else{
+            $class = $class . " col-lg-".$args["col-lg"];
+        }
     }
-    if($units != ""){
-        $units = "-" . $units;
+
+    if(array_key_exists("col-xl", $args)){
+        if($args["col-xl"] == "auto"){
+            $class = $class . "col-xl";
+        }else{
+            $class = $class . " col-xl-".$args["col-xl"];
+        }
     }
-    return '<div class="col'.$class_prefix.$units.'">'.$content.'</div>';
+
+    return sprintf('<div class="%s">%s</div>',$class,$content);
 }
 
 function grid_break(){
@@ -867,6 +931,156 @@ function page_link($args, $content){
 
     return '<a class="page-link" href="'.$links_to.'">'.$content.'</a>';
 }
+
+function list_group($content){
+    return '<ul class="list-group">'.$content.'</ul>';
+}
+
+function ext_footer($content){
+    return '<footer class="footer">
+      <div class="container">
+        <span class="text-muted">'.$content.'</span>
+      </div>
+    </footer>';
+}
+
+
+function carousel($content, $args){
+
+  if(array_key_exists("id", $args)){
+    $id = 'id="' $args["id"] . '"';
+    $id_name =  $args["id"] . '"';
+  } else{
+    $id = 'id="carousel"';
+
+  }
+
+  if(array_key_exists("class", $args)){
+    $class = 'class="' $args["class"] . '"';
+  } else {
+    $class = 'class="carousel slide"';
+  }
+
+  if(array_key_exists("autoplay", $args)){
+    $autoplay = 'data-ride="' $args["autoplay"] . '"';
+  } else {
+    $autoplay = '';
+  }
+
+  if(array_key_exists("intervel", $args)){
+    $intervel = 'data-intervel="' $args["intervel"] . '"';
+  } else {
+    $intervel = '';
+  }
+
+
+  if(array_key_exists("keyboard", $args)){
+    $keyboard = 'data-intervel="' $args["keyboard"] . '"';
+  } else {
+    $keyboard = '';
+  }
+
+  if(array_key_exists("pause", $args)){
+    $pause = 'data-intervel="' $args["pause"] . '"';
+  } else {
+    $pause = '';
+  }
+
+  if(array_key_exists("wrap", $args)){
+    $wrap = 'data-intervel="' $args["wrap"] . '"';
+  } else {
+    $wrap = '';
+  }
+
+  if(array_key_exists("controls", $args)){
+
+
+  $controls = '<a class="carousel-control-prev" href="#'.$id_name.'" role="button" data-slide="prev">
+     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+     <span class="sr-only">Previous</span>
+   </a>
+   <a class="carousel-control-next" href="#'.$id_name.'" role="button" data-slide="next">
+     <span class="carousel-control-next-icon" aria-hidden="true"></span>
+     <span class="sr-only">Next</span>
+   </a>';
+
+ } else {
+   $controls = '';
+ }
+
+
+  return sprintf('<div %s $s %s %s %s %s %s %s >', $id, $class, $autoplay, $interval, $keyboard, $pause, $wrap);
+  return '<div class="carousel-inner">';
+
+
+  return $content;
+
+  return '</div>';
+
+  return $controls;
+
+  return '</div>';
+
+
+
+
+}
+
+
+function carousel_item($content, $args){
+
+  if(array_key_exists("active", $args)){
+    $active = 'active';
+  } else {
+    $active = '';
+  }
+
+  if(array_key_exists("slide_class", $args)){
+    $slide_class = 'class="carousel-item' . $active . $args["slide_class"] . '"';
+  } else {
+    $slide_class = '';
+  }
+
+  if(array_key_exists("img_class", $args)){
+    $img_class = 'class="' $args["slide_class"] . '"';
+  } else {
+    $img_class = '';
+  }
+
+  if(array_key_exists("alt", $args)){
+    $alt = 'alt="' $args["alt"] . '"';
+  } else {
+    $alt = '';
+  }
+
+  if(array_key_exists("caption", $args)){
+    $caption = $args["caption"];
+  } else {
+    $caption = '';
+  }
+
+return sprintf('<div %s >' $slide_class);
+
+return sprintf('<div %s %s >', $img_class, $src, $alt);
+
+
+if ($caption == true){
+
+
+return sprintf('<div %s><%s></%s>%s<%s>%s</%s></div>' $caption_classes, $heading_element, $heading_content, $paragraph_element, $paragraph_content );
+
+}
+
+
+
+return '</div>';
+
+
+
+}
+
+
+
 
 
 
