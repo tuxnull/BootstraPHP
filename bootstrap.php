@@ -1,4 +1,5 @@
 <?PHP
+
 echo "<!-- BootstraPHP initialized! https://github.com/tuxnull/BootstraPHP -->";
 echo "<meta name='bootstraPHP' content='https://github.com/tuxnull/BootstraPHP'>";
 echo "<meta name='bootstraPHP_docs' content='https://tuxnull.com'>";
@@ -236,7 +237,9 @@ function alert($args, $content){
     } else {
         return sprintf('<div class="alert alert-%s" role="alert">%s</div>',$style,$content);
     }
+
 }
+
 
 function badge($content, $style){
     return '<span class="badge badge-'.$style.'">'.$content.'</span>';
@@ -480,6 +483,18 @@ function jumbotron_content($args, $content){
         $lead_text = $args["lead_text"];
     }else{
         $lead_text = "";
+    }
+
+    if(array_key_exists("title_tag", $args)){
+        $title_tag = $args["title_tag"];
+    }else{
+        $title_tag = "h1";
+    }
+
+    if(array_key_exists("title_class", $args)){
+        $title_tag = $args["title_class"];
+    }else{
+        $title_tag = "display-4";
     }
 
     if(array_key_exists("title", $args)){
@@ -1003,6 +1018,130 @@ function modal_body($content){
 function modal_footer($content){
     return sprintf('<div class="modal-footer">%s</div>',$content)
 }
+
+
+
+
+
+
+
+function carousel($content, $args){
+
+  if(array_key_exists("id", $args)){
+    $id = 'id="' $args["id"] . '"';
+    $id_name =  $args["id"] . '"';
+  } else{
+    $id = 'id="carousel"';
+
+  }
+
+  if(array_key_exists("class", $args)){
+    $class = 'class="' $args["class"] . '"';
+  } else {
+    $class = 'class="carousel slide"';
+  }
+
+  if(array_key_exists("autoplay", $args)){
+    $autoplay = 'data-ride="' $args["autoplay"] . '"';
+  } else {
+    $autoplay = '';
+  }
+
+  if(array_key_exists("intervel", $args)){
+    $intervel = 'data-intervel="' $args["intervel"] . '"';
+  } else {
+    $intervel = '';
+  }
+
+
+  if(array_key_exists("keyboard", $args)){
+    $keyboard = 'data-intervel="' $args["keyboard"] . '"';
+  } else {
+    $keyboard = '';
+  }
+
+  if(array_key_exists("pause", $args)){
+    $pause = 'data-intervel="' $args["pause"] . '"';
+  } else {
+    $pause = '';
+  }
+
+  if(array_key_exists("wrap", $args)){
+    $wrap = 'data-intervel="' $args["wrap"] . '"';
+  } else {
+    $wrap = '';
+  }
+
+  if(array_key_exists("controls", $args)){
+
+
+  $controls = '<a class="carousel-control-prev" href="#'.$id_name.'" role="button" data-slide="prev">
+     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+     <span class="sr-only">Previous</span>
+   </a>
+   <a class="carousel-control-next" href="#'.$id_name.'" role="button" data-slide="next">
+     <span class="carousel-control-next-icon" aria-hidden="true"></span>
+     <span class="sr-only">Next</span>
+   </a>';
+
+ } else {
+   $controls = '';
+ }
+
+
+  return sprintf('<div %s $s %s %s %s %s %s %s >', $id, $class, $autoplay, $interval, $keyboard, $pause, $wrap) . '<div class="carousel-inner">' . $content; .'</div>' . $controls .'</div>';
+
+}
+
+
+function carousel_item($content, $args){
+
+  if(array_key_exists("active", $args)){
+    $active = 'active';
+  } else {
+    $active = '';
+  }
+
+  if(array_key_exists("slide_class", $args)){
+    $slide_class = 'class="carousel-item' . $active . $args["slide_class"] . '"';
+  } else {
+    $slide_class = '';
+  }
+
+  if(array_key_exists("img_class", $args)){
+    $img_class = 'class="' $args["slide_class"] . '"';
+  } else {
+    $img_class = '';
+  }
+
+  if(array_key_exists("alt", $args)){
+    $alt = 'alt="' $args["alt"] . '"';
+  } else {
+    $alt = '';
+  }
+
+  if(array_key_exists("caption", $args)){
+    $caption = $args["caption"];
+  } else {
+    $caption = '';
+  }
+
+
+  if ($caption == true){
+
+
+  $caption = sprintf('<div %s><%s></%s>%s<%s>%s</%s></div>' $caption_classes, $heading_element, $heading_content, $paragraph_element, $paragraph_content );
+
+  }
+
+
+return sprintf('<div %s >' $slide_class) . sprintf('<div %s %s >', $img_class, $src, $alt) . $caption . '</div>';
+
+
+
+}
+
+
 
 
 
