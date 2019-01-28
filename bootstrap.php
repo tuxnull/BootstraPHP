@@ -1,6 +1,7 @@
 <?PHP
 echo "<!-- BootstraPHP initialized! https://github.com/tuxnull/BootstraPHP -->";
 echo "<meta name='bootstraPHP' content='https://github.com/tuxnull/BootstraPHP'>";
+echo "<meta name='bootstraPHP_docs' content='https://tuxnull.com'>";
 
 
 function init_meta(){
@@ -24,7 +25,6 @@ function init_js(){
 }
 
 function init_navbar($args, $content){
-
     if(array_key_exists("style",$args)){
         $style = $args["style"];
     }else{
@@ -43,14 +43,14 @@ function init_navbar($args, $content){
         return '<b>BootstraPHP has encountered an error: init_navbar is missing required argument "brand"';
     }
 
-
-    return '<nav class="navbar navbar-expand-lg navbar-'.$style.' bg-'.$style.'">
-    <a class="navbar-brand" href="'.$links_to.'">'.$brand.'</a>
+    $returnstr = '<nav class="navbar navbar-expand-lg navbar-%s bg-%s">
+    <a class="navbar-brand" href="%s">%s</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">'.$content."</ul></div></nav>";
+    <ul class="navbar-nav mr-auto">%s</ul></div></nav>';
+    return sprintf($returnstr,$style,$style,$links_to,$brand,$content);
 }
 
 function navbar_element($args){
@@ -100,26 +100,29 @@ function navbar_element($args){
         $returl = "";
     }
 
+    if(array_key_exists("dropdown_id",$args)){
+        $dropdown_id = $args["dropdown_id"];
+    }else{
+        $dropdown_id = "";
+    }
+
+
     if($element == "link"){
         if($active == true){
-            return '<li class="nav-item active">
-            <a class="nav-link" href="'.$links_to.'">'.$name.'</a>
-            </li>';
+            return sprintf('<li class="nav-item active">
+            <a class="nav-link" href="%s">%s</a>
+            </li>',$links_to,$name);
         }else{
-            return '<li class="nav-item">
-            <a class="nav-link" href="'.$links_to.'">'.$name.'</a>
-            </li>';
+            return sprintf('<li class="nav-item">
+            <a class="nav-link" href="%s">%s</a>
+            </li>',$links_to,$name);
         }
     }
     if($element == "dropdown"){
-        return '<li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="'.$links_to.'" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        '.$name.'
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-        '.$dcontent.'
-        </div>
-        </li>';
+        return sprintf('<li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="%s" id="%s" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">%s</a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">%s</div>
+        </li>',$links_to,$dropdown_id,$name,$dcontent);
     }
     if($element == "search"){
         return '<form class="form-inline my-2 my-lg-0" action="'.$links_to.'" method="'.$returl.'">
