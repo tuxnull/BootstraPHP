@@ -612,30 +612,49 @@ function grid_row($args, $content){
 
 function col($args, $content){
 
-    if(array_key_exists("class_prefix", $args)){
-        $class_prefix = $args["class_prefix"];
-    }else{
-        $class_prefix = "";
+    $class = "";
+
+    if(array_key_exists("col", $args)){
+        if($args["col"] == "auto"){
+            $class = $class . "col";
+        }else{
+            $class = $class . " col-".$args["col"];
+        }
     }
 
-    if(array_key_exists("units", $args)){
-        $units = $args["units"];
-    }else{
-        $units = "";
+    if(array_key_exists("col-sm", $args)){
+        if($args["col-sm"] == "auto"){
+            $class = $class . "col-sm";
+        }else{
+            $class = $class . " col-sm-".$args["col-sm"];
+        }
     }
 
-
-    if($class_prefix != ""){
-        $class_prefix = "-".$class_prefix;
+    if(array_key_exists("col-md", $args)){
+        if($args["col-md"] == "auto"){
+            $class = $class . "col-md";
+        }else{
+            $class = $class . " col-md-".$args["col-md"];
+        }
     }
 
-    if($units>12){
-        echo '"<meta name="bootstraPHP_warning" content="Using a column with more than 12 width-units is not recommended!">';
+    if(array_key_exists("col-lg", $args)){
+        if($args["col-lg"] == "auto"){
+            $class = $class . "col-lg";
+        }else{
+            $class = $class . " col-lg-".$args["col-lg"];
+        }
     }
-    if($units != ""){
-        $units = "-" . $units;
+
+    if(array_key_exists("col-xl", $args)){
+        if($args["col-xl"] == "auto"){
+            $class = $class . "col-xl";
+        }else{
+            $class = $class . " col-xl-".$args["col-xl"];
+        }
     }
-    return '<div class="col'.$class_prefix.$units.'">'.$content.'</div>';
+
+    return sprintf('<div class="%s">%s</div>',$class,$content);
 }
 
 function grid_break(){
