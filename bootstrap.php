@@ -929,5 +929,85 @@ function ext_footer($content){
     </footer>';
 }
 
+function button_group($args, $content){
+    if(array_key_exists("size",$args)){
+        $sizing = "btn-group-".$args["size"];
+    }else{
+        $sizing = "";
+    }
+
+    if(array_key_exists("vertical",$args)){
+        $vertical = $args["vertical"];
+    }else{
+        $vertical = false;
+    }
+
+    if($vertical == true){
+        $vertical = "-vertical";
+    }
+
+    return sprintf('<div class="btn-group%s %s" role="group" aria-label="Basic example">%s</div>',$vertical,$sizing,$content);
+}
+
+function button_toolbar($content){
+    return sprintf('<div class="btn-toolbar" role="toolbar">%s</div>',$content);
+}
+
+function modal($args, $content){
+    if(array_key_exists("size",$args)){
+        $size = "modal-".$args["size"];
+    }else{
+        $size = "";
+    }
+
+    if(array_key_exists("id",$args)){
+        $id = $args["id"];
+    }else{
+        $id = "";
+    }
+
+    return sprintf('<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" id="%s">
+    <div class="modal-dialog %s"><div class="modal-content">
+    %s </div></div></div>',$id,$size,$content);
+}
+
+function modal_header($args){
+    if(array_key_exists("title",$args)){
+        $title = $args["title"];
+    }else{
+        $title = "";
+    }
+
+    if(array_key_exists("close_button",$args)){
+        $close_button = $args["close_button"];
+    }else{
+        $close_button = false;
+    }
+
+    if($close_button == true){
+        $close_button = '<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>';
+    }else{
+        $close_button = "";
+    }
+
+    return '<div class="modal-header"><h5 class="modal-title" id="exampleModalCenterTitle">'.$title.'</h5>'.$close_button.'</div>';
+
+}
+
+function modal_body($content){
+    return sprintf('<div class="modal-body">%s</div>',$content);
+}
+
+function modal_footer($content){
+    return sprintf('<div class="modal-footer">%s</div>',$content)
+}
+
+
+
+
+
+
 
 ?>
