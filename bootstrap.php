@@ -479,9 +479,11 @@ function jumbotron_content($args, $content){
     }
 
     if(array_key_exists("spacer", $args)){
-        $spacer = $args["spacer"];
+        if($args["spacer"] == true){
+            $spacer = '<hr class="my-4">';
+        }
     }else{
-        $spacer = '<hr class="my-4">';
+        $spacer = "";
     }
 
     if(array_key_exists("button_type", $args)){
