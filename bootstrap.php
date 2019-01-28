@@ -1016,7 +1016,7 @@ function modal_body($content){
 }
 
 function modal_footer($content){
-    return sprintf('<div class="modal-footer">%s</div>',$content)
+    return sprintf('<div class="modal-footer">%s</div>',$content);
 }
 
 
@@ -1028,7 +1028,7 @@ function modal_footer($content){
 function carousel($content, $args){
 
   if(array_key_exists("id", $args)){
-    $id = 'id="' $args["id"] . '"';
+    $id = 'id="' . $args["id"] . '"';
     $id_name =  $args["id"] . '"';
   } else{
     $id = 'id="carousel"';
@@ -1036,38 +1036,38 @@ function carousel($content, $args){
   }
 
   if(array_key_exists("class", $args)){
-    $class = 'class="' $args["class"] . '"';
+    $class = 'class="' . $args["class"] . '"';
   } else {
     $class = 'class="carousel slide"';
   }
 
   if(array_key_exists("autoplay", $args)){
-    $autoplay = 'data-ride="' $args["autoplay"] . '"';
+    $autoplay = 'data-ride="' . $args["autoplay"] . '"';
   } else {
     $autoplay = '';
   }
 
   if(array_key_exists("intervel", $args)){
-    $intervel = 'data-intervel="' $args["intervel"] . '"';
+    $intervel = 'data-intervel="' . $args["intervel"] . '"';
   } else {
     $intervel = '';
   }
 
 
   if(array_key_exists("keyboard", $args)){
-    $keyboard = 'data-intervel="' $args["keyboard"] . '"';
+    $keyboard = 'data-intervel="' . $args["keyboard"] . '"';
   } else {
     $keyboard = '';
   }
 
   if(array_key_exists("pause", $args)){
-    $pause = 'data-intervel="' $args["pause"] . '"';
+    $pause = 'data-intervel="' . $args["pause"] . '"';
   } else {
     $pause = '';
   }
 
   if(array_key_exists("wrap", $args)){
-    $wrap = 'data-intervel="' $args["wrap"] . '"';
+    $wrap = 'data-intervel="' . $args["wrap"] . '"';
   } else {
     $wrap = '';
   }
@@ -1089,7 +1089,7 @@ function carousel($content, $args){
  }
 
 
-  return sprintf('<div %s $s %s %s %s %s %s %s >', $id, $class, $autoplay, $interval, $keyboard, $pause, $wrap) . '<div class="carousel-inner">' . $content; .'</div>' . $controls .'</div>';
+  return sprintf('<div %s $s %s %s %s %s %s %s >', $id, $class, $autoplay, $interval, $keyboard, $pause, $wrap) . '<div class="carousel-inner">' . $content .'</div>' . $controls .'</div>';
 
 }
 
@@ -1109,13 +1109,13 @@ function carousel_item($content, $args){
   }
 
   if(array_key_exists("img_class", $args)){
-    $img_class = 'class="' $args["slide_class"] . '"';
+    $img_class = 'class="' . $args["slide_class"] . '"';
   } else {
     $img_class = '';
   }
 
   if(array_key_exists("alt", $args)){
-    $alt = 'alt="' $args["alt"] . '"';
+    $alt = 'alt="' . $args["alt"] . '"';
   } else {
     $alt = '';
   }
@@ -1126,16 +1126,32 @@ function carousel_item($content, $args){
     $caption = '';
   }
 
+  if(array_key_exists("caption_classes", $args)){
+    $caption_classes = 'class="'.$args["caption_classes"].'"';
+  } else {
+    $caption_classes = 'class="carousel-caption d-none d-md-block"';
+  }
+
+  if(array_key_exists("slide_classes", $args)){
+    $slide_class = 'class="'.$args["slide_classes"].'"';
+  } else {
+    $slide_class = 'class="carousel-item"';
+  }
+
+
+
+
+
 
   if ($caption == true){
 
 
-  $caption = sprintf('<div %s><%s></%s>%s<%s>%s</%s></div>' $caption_classes, $heading_element, $heading_content, $paragraph_element, $paragraph_content );
+  $caption = sprintf('<div %s><%s></%s>%s<%s>%s</%s></div>', $caption_classes, $heading_element, $heading_content, $paragraph_element, $paragraph_content );
 
   }
 
 
-return sprintf('<div %s >' $slide_class) . sprintf('<div %s %s >', $img_class, $src, $alt) . $caption . '</div>';
+  return sprintf('<div %s >', $slide_class) . sprintf('<div %s %s >', $img_class, $src, $alt) . $caption . '</div>';
 
 
 
