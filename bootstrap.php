@@ -322,13 +322,21 @@ function card($args, $content){
         $card_header = "";
     }
 
+    if(array_key_exists("bg-style",$args)){
+        $style = "bg-".$args["bg-style"];
+    }else{
+        $style = "";
+    }
+
+
+
     if($image_url == ""){
         if($card_header == ""){
             $header = "<!-- Optional Card Header position here -->";
         }else{
             $header = '<div class="card-header">'.$card_header.'</div>';
         }
-        return '<div class="card">
+        return '<div class="card '.$style.'">
         '.$header.'
         <div class="card-body">
         '.$content.'
