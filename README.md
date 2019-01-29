@@ -5,7 +5,7 @@ Go from this
 ![Go from this](https://tuxnull.com/bootstraphp/image1.png)
 
 ...to this!
-![Go from this](https://tuxnull.com/bootstraphp/image2.png)
+![Go from this](https://tuxnull.com/bootstraphp/image2.png?nocache=1)
 
 
 
