@@ -1033,18 +1033,26 @@ function carousel($args, $content){
         $controls = false;
     }
 
+    if(array_key_exists("id",$args)){
+        $id = $args["id"];
+    }else{
+        $id = "carousel";
+    }
+
+
+
     if($controls == true){
-        $controls = '<a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+        $controls = '<a class="carousel-control-prev" href="#'.$id.'" role="button" data-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="sr-only">Previous</span>
         </a>
-        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+        <a class="carousel-control-next" href="#'.$id.'" role="button" data-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
         </a>';
     }
 
-    return '<div id="carouselExampleControls" class="carousel slide" data-ride="carousel"><div class="carousel-inner">'.$content.'</div>'.$controls.'</div>';
+    return '<div id="'.$id.'" class="carousel slide" data-ride="carousel"><div class="carousel-inner">'.$content.'</div>'.$controls.'</div>';
 }
 
 function carousel_item($args){
@@ -1060,15 +1068,57 @@ function carousel_item($args){
         return '<b>BootstraPHP has encountered an error: carousel_item is missing required argument "img_src"';
     }
 
+    if(array_key_exists("duration",$args)){
+        $duration = $args["duration"];
+    }else{
+        $duration = "5000";
+    }
 
     if($active == true){
         $active = "active";
     }
 
-    return sprintf('<div class="carousel-item %s"><img src="%s" class="d-block w-100" alt="..."></div>',$active,$img_src);
+    return sprintf('<div class="carousel-item %s" data-interval="%s"><img src="%s" class="d-block w-100" alt="..."></div>',$active,$duration,$img_src);
 
 }
 
+
+function progress_bar($args, $content){
+
+    if(array_key_exists("progress",$args)){
+        $progress = $args["progress"];
+    }else{
+        $progress = "100";
+    }
+
+    if(array_key_exists("style",$args)){
+        $style = "bg-".$args["progress"];
+    }else{
+        $style = "";
+    }
+
+    if(array_key_exists("id",$args)){
+        $id = $args["id"];
+    }else{
+        $id = "progress";
+    }
+
+    if(array_key_exists("striped",$args)){
+        $striped = $args["id"];
+    }else{
+        $striped = false;
+    }
+
+    if($striped == true){
+        $striped = "progress-bar-striped"
+    }
+
+
+
+    return'<div class="progress">
+      <div class="progress-bar '.$striped.' '.$style.'" role="progressbar" style="width: '.$progress.'%" aria-valuenow="'.$progress.'" aria-valuemin="0" aria-valuemax="100" id="'.$progress.'">'.$content.'</div>
+    </div>';
+}
 
 
 
