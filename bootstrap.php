@@ -1,4 +1,5 @@
 <?PHP
+
 echo "<!-- BootstraPHP initialized! https://github.com/tuxnull/BootstraPHP -->";
 echo "<meta name='bootstraPHP' content='https://github.com/tuxnull/BootstraPHP'>";
 echo "<meta name='bootstraPHP_docs' content='https://tuxnull.com'>";
@@ -236,7 +237,9 @@ function alert($args, $content){
     } else {
         return sprintf('<div class="alert alert-%s" role="alert">%s</div>',$style,$content);
     }
+
 }
+
 
 function badge($content, $style){
     return '<span class="badge badge-'.$style.'">'.$content.'</span>';
@@ -480,6 +483,18 @@ function jumbotron_content($args, $content){
         $lead_text = $args["lead_text"];
     }else{
         $lead_text = "";
+    }
+
+    if(array_key_exists("title_tag", $args)){
+        $title_tag = $args["title_tag"];
+    }else{
+        $title_tag = "h1";
+    }
+
+    if(array_key_exists("title_class", $args)){
+        $title_tag = $args["title_class"];
+    }else{
+        $title_tag = "display-4";
     }
 
     if(array_key_exists("title", $args)){
@@ -1001,8 +1016,60 @@ function modal_body($content){
 }
 
 function modal_footer($content){
-    return sprintf('<div class="modal-footer">%s</div>',$content)
+    return sprintf('<div class="modal-footer">%s</div>',$content);
 }
+
+
+
+
+
+
+
+function carousel($args, $content){
+
+    if(array_key_exists("controls",$args)){
+        $controls = $args["controls"];
+    }else{
+        $controls = false;
+    }
+
+    if($controls == true){
+        $controls = '<a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+        </a>';
+    }
+
+    return '<div id="carouselExampleControls" class="carousel slide" data-ride="carousel"><div class="carousel-inner">'.$content.'</div>'.$controls.'</div>';
+}
+
+function carousel_item($args){
+    if(array_key_exists("active",$args)){
+        $active = $args["active"];
+    }else{
+        $active = false;
+    }
+
+    if(array_key_exists("img_src",$args)){
+        $img_src = $args["img_src"];
+    }else{
+        return '<b>BootstraPHP has encountered an error: carousel_item is missing required argument "img_src"';
+    }
+
+
+    if($active == true){
+        $active = "active";
+    }
+
+    return sprintf('<div class="carousel-item %s"><img src="%s" class="d-block w-100" alt="..."></div>',$active,$img_src);
+
+}
+
+
 
 
 
