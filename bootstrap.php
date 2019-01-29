@@ -1159,7 +1159,7 @@ function code_text($args, $content){
         $bg_white = "background-color: white; color: black; font-family: 'Consolas', Times, serif;";
     }
 
-    return '<div style="'.$bg_bash.'">'.$content.'</div>';
+    return '<div style="'.$bg_bash.' '.$bg_white.'">'.$content.'</div>';
 }
 
 
