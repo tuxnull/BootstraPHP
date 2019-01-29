@@ -1110,7 +1110,7 @@ function progress_bar($args, $content){
     }
 
     if($striped == true){
-        $striped = "progress-bar-striped"
+        $striped = "progress-bar-striped";
     }
 
 
@@ -1119,11 +1119,6 @@ function progress_bar($args, $content){
       <div class="progress-bar '.$striped.' '.$style.'" role="progressbar" style="width: '.$progress.'%" aria-valuenow="'.$progress.'" aria-valuemin="0" aria-valuemax="100" id="'.$progress.'">'.$content.'</div>
     </div>';
 }
-
-
-
-
-
 
 
 
