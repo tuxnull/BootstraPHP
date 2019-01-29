@@ -1153,10 +1153,10 @@ function code_text($args, $content){
 
 
     if($bg_bash == true){
-        $bg_bash = "background-color: black; color: white; font-family: 'Consolas', Times, serif;"
+        $bg_bash = "background-color: black; color: white; font-family: 'Consolas', Times, serif;";
     }
 	if($bg_white == true){
-        $bg_white = "background-color: white; color: black; font-family: 'Consolas', Times, serif;"
+        $bg_white = "background-color: white; color: black; font-family: 'Consolas', Times, serif;";
     }
 
     return '<div style="'.$bg_bash.'">'.$content.'</div>';
