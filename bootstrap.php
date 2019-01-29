@@ -1144,8 +1144,19 @@ function code_text($args, $content){
         $bg_bash = false;
     }
 
+	if(array_key_exists("bg_white",$args)){
+        $bg_white = $args["bg_white"];
+    }else{
+        $bg_white = false;
+    }
+
+
+
     if($bg_bash == true){
-        $bg_bash = "background-color: black; color: white;"
+        $bg_bash = "background-color: black; color: white; font-family: 'Consolas', Times, serif;"
+    }
+	if($bg_white == true){
+        $bg_white = "background-color: white; color: black; font-family: 'Consolas', Times, serif;"
     }
 
     return '<div style="'.$bg_bash.'">'.$content.'</div>';
