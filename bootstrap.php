@@ -126,7 +126,7 @@ function navbar_element($args){
     }else{
         $autodetect_active = true;
     }
-    
+
     if($autodetect_active == true){
         if(pathinfo($_SERVER["SCRIPT_FILENAME"],PATHINFO_FILENAME).".".pathinfo($_SERVER["SCRIPT_FILENAME"],PATHINFO_EXTENSION) == $links_to){
             $active = true;
@@ -324,8 +324,8 @@ function card($args, $content){
         $card_header = "";
     }
 
-    if(array_key_exists("bg-style",$args)){
-        $style = "bg-".$args["bg-style"];
+    if(array_key_exists("bg_style",$args)){
+        $style = "bg-".$args["bg_style"];
     }else{
         $style = "";
     }
