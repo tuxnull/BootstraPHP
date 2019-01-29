@@ -328,8 +328,8 @@ function card($args, $content){
         $style = "";
     }
 
-    if(array_key_exists("text-white",$args)){
-        $whitetext = $args["text-white"];
+    if(array_key_exists("text_white",$args)){
+        $whitetext = $args["text_white"];
     }else{
         $whitetext = false;
     }
@@ -1137,6 +1137,19 @@ function progress_bar($args, $content){
     </div>';
 }
 
+function code_text($args, $content){
+    if(array_key_exists("bg_bash",$args)){
+        $bg_bash = $args["bg_bash"];
+    }else{
+        $bg_bash = false;
+    }
+
+    if($bg_bash == true){
+        $bg_bash = "background-color: black; color: white;"
+    }
+
+    return '<div style="'.$bg_bash.'">'.$content.'</div>';
+}
 
 
 ?>
