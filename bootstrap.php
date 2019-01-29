@@ -328,6 +328,15 @@ function card($args, $content){
         $style = "";
     }
 
+    if(array_key_exists("text-white",$args)){
+        $whitetext = $args["text-white"];
+    }else{
+        $whitetext = false;
+    }
+
+    if($whitetext == true){
+        $whitetext = "text-white";
+    }
 
 
     if($image_url == ""){
@@ -336,7 +345,7 @@ function card($args, $content){
         }else{
             $header = '<div class="card-header">'.$card_header.'</div>';
         }
-        return '<div class="card '.$style.'">
+        return '<div class="card '.$style.' '.$whitetext.'">
         '.$header.'
         <div class="card-body">
         '.$content.'
