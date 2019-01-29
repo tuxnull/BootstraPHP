@@ -1,6 +1,8 @@
 # BootstraPHP
 A Bootstrap wrapper for PHP
 
+Saves you time and keeps your site up-to-date
+
 Join our Discord! https://discord.gg/QjejxKm
 
 ## Install via composer
