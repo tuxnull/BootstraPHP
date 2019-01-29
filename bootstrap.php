@@ -6,7 +6,7 @@ echo "<meta name='bootstraPHP_docs' content='https://tuxnull.com'>";
 
 
 function init_meta(){
-    return '<meta charset="utf-8">
+    return '<meta charset="utf-8"><meta name="robots" content="index,follow">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">';
 }
 
@@ -83,11 +83,7 @@ function navbar_element($args){
         return '<b>BootstraPHP has encountered an error: navbar_element is missing required argument "name"';
     }
 
-    if(array_key_exists("active",$args)){
-        $active = $args["active"];
-    }else{
-        $active = false;
-    }
+
 
     if(array_key_exists("style",$args)){
         $style = $args["style"];
@@ -130,9 +126,7 @@ function navbar_element($args){
     }else{
         $autodetect_active = true;
     }
-
-
-
+    
     if($autodetect_active == true){
         if(pathinfo($_SERVER["SCRIPT_FILENAME"],PATHINFO_FILENAME).".".pathinfo($_SERVER["SCRIPT_FILENAME"],PATHINFO_EXTENSION) == $links_to){
             $active = true;
@@ -142,8 +136,16 @@ function navbar_element($args){
         }
     }
 
+    if(array_key_exists("active",$args)){
+        $active = $args["active"];
+    }else{
+        $active = false;
+    }
+
     if($active == true){
         $active = "active";
+    }else{
+        $active = "";
     }
 
 
@@ -377,13 +379,13 @@ function card_content($args, $content){
     }
 
     if(array_key_exists("subtitle", $args)){
-        $subtitle = $args["subtitle"];
+        $subtitle = '<h6 class="card-subtitle mb-2 text-muted">'.$args["subtitle"].'</h6>';
     }else{
         $subtitle = "";
     }
 
     return '<h5 class="card-title">'.$title.'</h5>
-    <h6 class="card-subtitle mb-2 text-muted">'.$subtitle.'</h6>
+    '.$subtitle.'
     <p class="card-text">'.$content.'</p>';
 }
 
@@ -1160,6 +1162,10 @@ function code_text($args, $content){
     }
 
     return '<div style="'.$bg_bash.' '.$bg_white.'">'.$content.'</div>';
+}
+
+function text($args, $content){
+
 }
 
 
