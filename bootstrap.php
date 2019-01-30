@@ -14,8 +14,12 @@ function page_title($title){
     return '<title>'.$title.'</title>';
 }
 
-function init_stylesheet(){
+function init_cdn_stylesheet(){
     return '<link rel="stylesheet" href="https://tuxnull.com/CDN/bootstrap.min.css">';
+}
+
+function init_stylesheet(){
+    return '<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">';
 }
 
 function init_bootswatch_stylesheet($style){
