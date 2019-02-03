@@ -692,6 +692,12 @@ function col($args, $content){
         }
     }
 
+    if(array_key_exists("order", $args)){
+        $class = $class . "order-".$args["order"];
+    }
+
+
+
     return sprintf('<div class="%s">%s</div>',$class,$content);
 }
 
