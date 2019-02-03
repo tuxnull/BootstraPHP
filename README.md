@@ -3,14 +3,7 @@ https://bootstraphp.com
 
 A Bootstrap wrapper for PHP
 
-## Example Pages
-
-Check out these Websites that use BootstraPHP:
-
-https://bootstraphp.com
-
-https://tuxnull.com
-
+Join our Discord! https://discord.gg/QjejxKm
 
 Go from this
 ![Go from this](https://tuxnull.com/bootstraphp/image1.png)
@@ -18,12 +11,13 @@ Go from this
 ...to this!
 ![Go from this](https://tuxnull.com/bootstraphp/image2.png?nocache=1)
 
+## Example Pages
 
+Check out these Websites that use BootstraPHP:
 
+https://bootstraphp.com
 
-Join our Discord! https://discord.gg/QjejxKm
-
-
+https://tuxnull.com
 
 ## Install via composer
 
