@@ -275,3 +275,49 @@ class NavbarCollapse extends Collapse {
     }
     
 }
+
+class Nav extends BootstrapComponent {
+    
+    public function __construct($p_id = "", $p_useList = true){
+        if($p_useList){
+            parent::__construct("ul", $p_id, array("nav"), "");
+        }else{
+            parent::__construct("nav", $p_id, array("nav"), "");
+        }
+    }
+    
+}
+
+class NavbarNav extends Nav {
+    
+    public function __construct($p_id = ""){
+        parent::__construct($p_id, true);
+        parent::addClass("navbar-nav");
+    }
+    
+}
+
+class NavItem extends BootstrapComponent {
+    
+    public function __construct($p_id = "", $p_content = ""){
+        parent::__construct("li", $p_id, array("nav-item"), $p_content);
+    }
+    
+}
+
+class NavLink extends BootstrapComponent {
+    
+    public function __construct($p_id = "", $p_text, $p_url){
+        parent::__construct("a", $p_id, array("nav-link"), $p_text);
+        $this->setUrl($p_url);
+    }
+    
+    public function setText($p_text){
+        parent::setContentHTML($p_text);
+    }
+    
+    public function setUrl($p_url){
+        parent::addParameter("href", $p_url);
+    }
+    
+}
