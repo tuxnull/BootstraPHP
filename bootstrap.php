@@ -235,3 +235,23 @@ class NavbarBrand extends BootstrapComponent {
     }
     
 }
+
+class NavbarToggler extends BootstrapComponent {
+    
+    public function __construct($p_id = "", $p_target = "navbar_content"){
+        parent::__construct("button",$p_id,array("navbar-toggler"),"");
+        parent::addParameter("type", "button");
+        parent::addParameter("data-bs-toggle", "button");
+        $this->setTarget($p_target);
+        parent::setContentHTML('<span class="navbar-toggler-icon"></span>');
+    }
+    
+    public function setTarget($p_target){
+        if(str_starts_with($p_target, "#")){
+            parent::addParameter("data-bs-target", $p_target);
+        }else{
+            parent::addParameter("data-bs-target", "#".$p_target);
+        }
+    }
+    
+}
