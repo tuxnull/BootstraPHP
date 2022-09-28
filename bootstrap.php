@@ -27,6 +27,7 @@ class BootstrapComponent {
     private $id = "";
     private $classes = array();
     private $children = array();
+    private $parameters = array();
     private $contentHTML = "";
     private $style = "";
     
@@ -95,14 +96,30 @@ class BootstrapComponent {
         }
     }
     
+    public function addParameter($p_name, $p_value){
+        $this->parameters[$p_name] = $p_value;
+    }
+    
+    public function getParameter($p_name){
+        return $this->parameters[$p_name];
+    }
+    
+    public function removeParameter($p_name){
+        unset($this->parameters[$p_name]);
+    }
+    
     public function export(){
         $classList = join(" ", $this->classes);
         $finalHTML = $this->contentHTML;
         foreach($this->children as $child){
             $finalHTML = $finalHTML . $child->export();
         }
+        $paramStr = "";
+        foreach($this->parameters as $name => $value){
+            $paramStr = $paramStr . " " . $name . '="' . $value . '"';
+        }
         
-        return '<'.$this->element.' id="'.$this->id.'" class="'.$classList.'" style="'.$this->style.'">'.$finalHTML.'</'.$this->element.'>';
+        return '<'.$this->element.' id="'.$this->id.'" class="'.$classList.'" style="'.$this->style.'" '.$paramStr.'>'.$finalHTML.'</'.$this->element.'>';
     }
     
 }
@@ -127,8 +144,6 @@ class ContainerFluid extends BootstrapComponent {
     }
     
 }
-
-
 
 class Navbar extends BootstrapComponent {
     
