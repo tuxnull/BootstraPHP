@@ -241,7 +241,7 @@ class NavbarToggler extends BootstrapComponent {
     public function __construct($p_id = "", $p_target = "navbar_content"){
         parent::__construct("button",$p_id,array("navbar-toggler"),"");
         parent::addParameter("type", "button");
-        parent::addParameter("data-bs-toggle", "button");
+        parent::addParameter("data-bs-toggle", "collapse");
         $this->setTarget($p_target);
         parent::setContentHTML('<span class="navbar-toggler-icon"></span>');
     }
@@ -252,6 +252,26 @@ class NavbarToggler extends BootstrapComponent {
         }else{
             parent::addParameter("data-bs-target", "#".$p_target);
         }
+    }
+    
+}
+
+class Collapse extends BootstrapComponent {
+    
+    public function __construct($p_id = "collapse", $p_show = false){
+        parent::__construct("div", $p_id, array("collapse"), "");
+        if($p_show){
+            parent::addClass("show");
+        }
+    }
+    
+}
+
+class NavbarCollapse extends Collapse {
+    
+    public function __construct($p_id = "navbar_content"){
+        parent::__construct($p_id);
+        parent::addClass("navbar-collapse");
     }
     
 }
