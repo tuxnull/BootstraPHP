@@ -122,7 +122,7 @@ class BackgroundColor {
 
 class ContainerFluid extends BootstrapComponent {
     
-    public function __construct($p_id){
+    public function __construct($p_id = ""){
         parent::__construct("div", $p_id, array("container-fluid"), "");
     }
     
