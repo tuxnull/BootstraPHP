@@ -199,3 +199,39 @@ class Navbar extends BootstrapComponent {
     }
     
 }
+
+class NavbarBrand extends BootstrapComponent {
+    
+    private $text = "";
+    private $imageUrl = "";
+    
+    public function __construct($p_id = "", $p_text = "", $p_imageUrl = "", $p_urlTo = "#"){
+        parent::__construct("a", $p_id, array("navbar-brand"), "");
+        $this->text = $p_text;
+        $this->imageUrl = $p_imageUrl;
+        $this->compile();
+    }
+    
+    public function setText($p_text){
+        $this->text = $p_text;
+        $this->compile();
+    }
+    
+    public function setImageUrl($p_imageUrl){
+        $this->imageUrl = $p_imageUrl;
+        $this->compile();
+    }
+    
+    private function compile(){
+        
+        $html = "";
+        if($this->imageUrl != ""){
+            $html = $html . '<img src="'.$this->imageUrl.'" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">';
+        }
+        if($this->text != ""){
+            $html = $html . $this->text;
+        }
+        parent::setContentHTML($html);
+    }
+    
+}
