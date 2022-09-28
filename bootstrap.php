@@ -321,3 +321,24 @@ class NavLink extends BootstrapComponent {
     }
     
 }
+
+class NavDropdown extends BootstrapComponent {
+    
+    public function __construct($p_id = "", $p_content = ""){
+        parent::__construct("li", $p_id, array("nav-item", "dropdown"), $p_content);
+    }
+    
+}
+
+#TODO: Extend to DropdownToggle instead of BootstrapComponent to allow for options like split toggles, etc.
+class NavDropdownToggle extends BootstrapComponent {
+    
+    public function __construct($p_id = "", $p_text){
+        parent::__construct("a", $p_id, array("nav-link", "dropdown-toggle"), $p_text);
+        parent::addParameter("role", "button");
+        parent::addParameter("data-bs-toggle", "dropdown");
+        
+    }
+    
+}
+
