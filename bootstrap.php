@@ -342,3 +342,35 @@ class NavDropdownToggle extends BootstrapComponent {
     
 }
 
+class DropdownMenu extends BootstrapComponent {
+    
+    public function __construct($p_id = ""){
+        parent::__construct("ul", $p_id, array("dropdown-menu"), "");
+    }
+    
+    public function addChild(BootstrapComponent $p_component){
+        $list_item = new BootstrapComponent("li", "", "", "");
+        $list_item->addChild($p_component);
+        parent::addChild($list_item);
+    }
+    
+}
+
+class DropdownItem extends BootstrapComponent {
+    
+    public function __construct($p_id = "", $p_name, $p_url = "#"){
+        parent::__construct("a", $p_id, array("dropdown-item"), $p_name);
+        parent::addParameter("href", $p_url);
+    }
+    
+    public function setURL($p_url){
+        parent::removeParameter("href");
+        parent::addParameter("href", $p_url);
+    }
+    
+    public function setName($p_name){
+        parent::setContentHTML($p_name);
+    }
+    
+}
+
