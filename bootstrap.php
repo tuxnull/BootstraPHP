@@ -4,7 +4,7 @@ namespace BootstraPHP;
 class BootstrapMeta {
     
     function getCSSLink(){
-        return '<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">';
+        return '<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">';
     }
     
     function getViewportMeta(){
@@ -16,7 +16,7 @@ class BootstrapMeta {
     }
     
     function getJSBundle(){
-        return '<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>';
+        return '<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>';
     }
     
 }
@@ -31,11 +31,11 @@ class BootstrapComponent {
     private $contentHTML = "";
     private $style = "";
     
-    public function __construct($p_element, $p_id, $p_classes, $p_contentHTML){
-        $this->element = $p_element;
-        $this->id = $p_id;
-        $this->classes = $p_classes;
-        $this->contentHTML = $p_contentHTML;
+    public function __construct($element = "div", $id = "", $classes = array(), $contentHTML = ""){
+        $this->element = $element;
+        $this->id = $id;
+        $this->classes = $classes;
+        $this->contentHTML = $contentHTML;
     }
     
     public function setElement($p_element){
@@ -101,7 +101,9 @@ class BootstrapComponent {
     }
     
     public function getParameter($p_name){
-        return $this->parameters[$p_name];
+        if(isset($this->parameters[$p_name]))
+            return $this->parameters[$p_name];
+        return null;
     }
     
     public function removeParameter($p_name){
@@ -124,6 +126,19 @@ class BootstrapComponent {
     
 }
 
+class Color {
+    
+    const PRIMARY = "primary";
+    const SECONDARY = "secondary";
+    const SUCCESS = "success";
+    const INFO = "info";
+    const WARNING = "warning";
+    const DANGER = "danger";    
+    const LIGHT = "light";
+    const DARK = "dark";
+
+}
+
 class BackgroundColor {
     
     const PRIMARY = "bg-primary";
@@ -137,8 +152,11 @@ class BackgroundColor {
     
 }
 
+
+
+//DEPRECATED - PLEASE USE Container(fluid: true)
 class ContainerFluid extends BootstrapComponent {
-    
+
     public function __construct($p_id = ""){
         parent::__construct("div", $p_id, array("container-fluid"), "");
     }
@@ -156,9 +174,9 @@ class Navbar extends BootstrapComponent {
     private $expandBreakpoint;
     private $currentBackgroundColor;
     
-    public function __construct($p_id = "", $p_expand = Navbar::EXPAND_LG, $p_backgroundColor = BackgroundColor::LIGHT, $p_isDark = false){
+    public function __construct($id = "", $p_expand = Navbar::EXPAND_LG, $p_backgroundColor = BackgroundColor::LIGHT, $p_isDark = false){
         $this->expandBreakpoint = $p_expand;
-        parent::__construct("div", $p_id, array("navbar", BackgroundColor::LIGHT, $p_expand), "");
+        parent::__construct("div", $id, array("navbar", BackgroundColor::LIGHT, $p_expand), "");
         $this->currentBackgroundColor = BackgroundColor::LIGHT;
     }
     
@@ -269,8 +287,8 @@ class Collapse extends BootstrapComponent {
 
 class NavbarCollapse extends Collapse {
     
-    public function __construct($p_id = "navbar_content"){
-        parent::__construct($p_id);
+    public function __construct($id = "navbar_content"){
+        parent::__construct($id);
         parent::addClass("navbar-collapse");
     }
     
@@ -278,8 +296,8 @@ class NavbarCollapse extends Collapse {
 
 class Nav extends BootstrapComponent {
     
-    public function __construct($p_id = "", $p_useList = true){
-        if($p_useList){
+    public function __construct($p_id = "", $useList = true){
+        if($useList){
             parent::__construct("ul", $p_id, array("nav"), "");
         }else{
             parent::__construct("nav", $p_id, array("nav"), "");
@@ -307,7 +325,7 @@ class NavItem extends BootstrapComponent {
 
 class NavLink extends BootstrapComponent {
     
-    public function __construct($p_id = "", $p_text, $p_url){
+    public function __construct($p_id = "", $p_text = "", $p_url = ""){
         parent::__construct("a", $p_id, array("nav-link"), $p_text);
         $this->setUrl($p_url);
     }
@@ -374,3 +392,168 @@ class DropdownItem extends BootstrapComponent {
     
 }
 
+class FormInput extends BootstrapComponent {
+    public function __construct($id = "", $type = "hidden", $name = "", $value = "", $placeholder = ""){
+        parent::__construct("input", $id, array("form-control"), "");
+        parent::addParameter("type", $type);
+        parent::addParameter("name", $name);
+        parent::addParameter("value", $value);
+        parent::addParameter("placeholder", $placeholder);
+    }
+
+    public function setType($type){
+        parent::removeParameter("type");
+        parent::addParameter("type", $type);
+    }
+
+    public function getType(){
+        return parent::getParameter("type");
+    }
+
+    public function setName($name){
+        parent::removeParameter("name");
+        parent::addParameter("name", $name);
+    }
+
+    public function getName(){
+        return parent::getParameter("name");
+    }
+
+    public function setValue($value){
+        parent::removeParameter("value");
+        parent::addParameter("value", $value);
+    }
+
+    public function getValue(){
+        return parent::getParameter("value");
+    }
+
+    public function setPlaceholder($placeholder){
+        parent::removeParameter("placeholder");
+        parent::addParameter("placeholder", $placeholder);
+    }
+
+    public function getPlaceholder(){
+        return parent::getParameter("placeholder");
+    }
+
+    public function setRequired($required){
+        if($required){
+            parent::addParameter("required", "required");
+        }else{
+            parent::removeParameter("required");
+        }
+    }
+
+    public function getRequired(){
+        if(parent::getParameter("required") != null){
+            return true;
+        }
+        return false;
+    }
+
+    public function setDisabled($disabled){
+        if($disabled){
+            parent::addParameter("disabled", "disabled");
+        }else{
+            parent::removeParameter("disabled");
+        }
+    }
+
+    public function setReadOnly($readOnly){
+        if($readOnly){
+            parent::addParameter("readonly", "readonly");
+        }else{
+            parent::removeParameter("readonly");
+        }
+    }
+
+    public function setAutoFocus($autoFocus){
+        if($autoFocus){
+            parent::addParameter("autofocus", "autofocus");
+        }else{
+            parent::removeParameter("autofocus");
+        }
+    }
+
+    public function setAutoComplete($autoComplete){
+        if($autoComplete){
+            parent::addParameter("autocomplete", "autocomplete");
+        }else{
+            parent::removeParameter("autocomplete");
+        }
+    }
+
+    public function setAutoCorrect($autoCorrect){
+        if($autoCorrect){
+            parent::addParameter("autocorrect", "autocorrect");
+        }else{
+            parent::removeParameter("autocorrect");
+        }
+    }
+}
+
+class InputGroup extends BootstrapComponent {
+
+    public function __construct($id = "", $size = ""){
+        parent::__construct("div", $id, array("input-group"), "");
+        if($size != ""){
+            parent::addClass("input-group-" . $size);
+        }
+    }
+    
+}
+
+class Button extends BootstrapComponent {
+
+    public function __construct($id = "", $text = "", $type = "button", $size = "", $color = "primary", $link_to = ""){
+        parent::__construct("button", $id, array("btn","btn-".$color), $text);
+        parent::addParameter("type", $type);
+        if($size != ""){
+            parent::addClass("btn-" . $size);
+        }
+        if($link_to != ""){
+            parent::setElement("a");
+            parent::addParameter("href", $link_to);
+        }
+    }
+
+    public function setColor($color, $outline = false){
+
+        //Remove all btn- classes (color classes)
+        $classes = parent::getClasses();
+        foreach($classes as $class){
+            if(str_starts_with($class, "btn-")){
+                parent::removeClass($class);
+            }
+        }
+
+        if(!str_contains($color, "-")){
+            if($outline){
+                parent::addClass("btn-outline-" . $color);
+            }else{
+                parent::addClass("btn-" . $color);
+            }
+        }else{
+            parent::addClass($color);
+        }
+
+    }
+
+    public function setText($text){
+        parent::setContentHTML($text);
+    }
+
+}
+
+class Container extends BootstrapComponent {
+
+    public function __construct($id = "", $fluid = false){
+        if($fluid){
+            parent::__construct("div", $id, array("container-fluid"), "");
+        }else{
+            parent::__construct("div", $id, array("container"), "");
+        }
+    }
+
+}
