@@ -110,7 +110,7 @@ class BootstrapComponent {
         unset($this->parameters[$p_name]);
     }
     
-    public function export(){
+    public function export($ignore_empty_parameters = true){
         $classList = join(" ", $this->classes);
         $finalHTML = $this->contentHTML;
         foreach($this->children as $child){
@@ -118,10 +118,33 @@ class BootstrapComponent {
         }
         $paramStr = "";
         foreach($this->parameters as $name => $value){
+
+            if($value == "" && $ignore_empty_parameters){
+                continue;
+            }
+
             $paramStr = $paramStr . " " . $name . '="' . $value . '"';
         }
         
-        return '<'.$this->element.' id="'.$this->id.'" class="'.$classList.'" style="'.$this->style.'" '.$paramStr.'>'.$finalHTML.'</'.$this->element.'>';
+        $out_builder = "";
+        $out_builder = $out_builder . '<'.$this->element;
+        if($this->id != ""){
+            $out_builder = $out_builder . ' id="'.$this->id.'"';
+        }
+        if($classList != ""){
+            $out_builder = $out_builder . ' class="'.$classList.'"';
+        }
+        if($this->style != ""){
+            $out_builder = $out_builder . ' style="'.$this->style.'"';
+        }
+        if($paramStr != ""){
+            $out_builder = $out_builder . ' '.$paramStr;
+        }
+        $out_builder = $out_builder . '>';
+        $out_builder = $out_builder . $finalHTML;
+        $out_builder = $out_builder . '</'.$this->element.'>';
+
+        return $out_builder;
     }
     
 }
